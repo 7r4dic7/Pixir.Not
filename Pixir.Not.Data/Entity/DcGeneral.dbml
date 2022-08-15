@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ManualPersona" Class="DcGeneralDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=ManualPersona;User ID=sa" SettingsObjectName="Pixir.Not.Data.Properties.Settings" SettingsPropertyName="ManualPersonaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ComCatEstadoCivil" Member="ComCatEstadoCivil">
+    <Type Name="ComCatEstadoCivil">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strValor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="strDescripcion" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="ComCatEstadoCivil_ComPersona" Member="ComPersona" ThisKey="id" OtherKey="idComCatEstadoCivil" Type="ComPersona" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ComCatEstadoRegistro" Member="ComCatEstadoRegistro">
+    <Type Name="ComCatEstadoRegistro">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strValor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="strDescripcion" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="ComCatEstadoRegistro_ComPersona" Member="ComPersona" ThisKey="id" OtherKey="idComCatEstadoRegistro" Type="ComPersona" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ComCatNacionalidad" Member="ComCatNacionalidad">
+    <Type Name="ComCatNacionalidad">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strValor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="strDescripcion" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="ComCatNacionalidad_ComPersona" Member="ComPersona" ThisKey="id" OtherKey="idComCatNacionalidad" Type="ComPersona" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ComCatOcupacion" Member="ComCatOcupacion">
+    <Type Name="ComCatOcupacion">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strValor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="strDescripcion" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="ComCatOcupacion_ComPersona" Member="ComPersona" ThisKey="id" OtherKey="idComCatOcupacion" Type="ComPersona" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ComCatRegimenMatrimonial" Member="ComCatRegimenMatrimonial">
+    <Type Name="ComCatRegimenMatrimonial">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strValor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="strDescripcion" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="ComCatRegimenMatrimonial_ComPersona" Member="ComPersona" ThisKey="id" OtherKey="idComCatRegimenMatrimonial" Type="ComPersona" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ComCatSexo" Member="ComCatSexo">
+    <Type Name="ComCatSexo">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strValor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="strDescripcion" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="ComCatSexo_ComPersona" Member="ComPersona" ThisKey="id" OtherKey="idComCatSexo" Type="ComPersona" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ComCatTipoDatoContacto" Member="ComCatTipoDatoContacto">
+    <Type Name="ComCatTipoDatoContacto">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strValor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="strDescripcion" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="ComCatTipoDatoContacto_ComDatoContacto" Member="ComDatoContacto" ThisKey="id" OtherKey="idComCatTipoContacto" Type="ComDatoContacto" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ComDatoContacto" Member="ComDatoContacto">
+    <Type Name="ComDatoContacto">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idComPersona" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idComCatTipoContacto" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="strDatoContacto" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="ComCatTipoDatoContacto_ComDatoContacto" Member="ComCatTipoDatoContacto" ThisKey="idComCatTipoContacto" OtherKey="id" Type="ComCatTipoDatoContacto" IsForeignKey="true" />
+      <Association Name="ComPersona_ComDatoContacto" Member="ComPersona" ThisKey="idComPersona" OtherKey="id" Type="ComPersona" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ComPersona" Member="ComPersona">
+    <Type Name="ComPersona">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idComCatEstadoCivil" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idComCatRegimenMatrimonial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idComCatOcupacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idComCatNacionalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idComCatEstadoRegistro" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="strNombre" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="strAPaterno" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="strAMaterno" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="strNombreCompleto" Type="System.String" DbType="NVarChar(155)" CanBeNull="true" />
+      <Column Name="dteFechaNacimiento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="idComCatSexo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="strCURP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="strFolioIFE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="strOriginario" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="bitDocEstancia" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="ComPersona_ComDatoContacto" Member="ComDatoContacto" ThisKey="id" OtherKey="idComPersona" Type="ComDatoContacto" />
+      <Association Name="ComCatEstadoCivil_ComPersona" Member="ComCatEstadoCivil" ThisKey="idComCatEstadoCivil" OtherKey="id" Type="ComCatEstadoCivil" IsForeignKey="true" />
+      <Association Name="ComCatEstadoRegistro_ComPersona" Member="ComCatEstadoRegistro" ThisKey="idComCatEstadoRegistro" OtherKey="id" Type="ComCatEstadoRegistro" IsForeignKey="true" />
+      <Association Name="ComCatNacionalidad_ComPersona" Member="ComCatNacionalidad" ThisKey="idComCatNacionalidad" OtherKey="id" Type="ComCatNacionalidad" IsForeignKey="true" />
+      <Association Name="ComCatOcupacion_ComPersona" Member="ComCatOcupacion" ThisKey="idComCatOcupacion" OtherKey="id" Type="ComCatOcupacion" IsForeignKey="true" />
+      <Association Name="ComCatRegimenMatrimonial_ComPersona" Member="ComCatRegimenMatrimonial" ThisKey="idComCatRegimenMatrimonial" OtherKey="id" Type="ComCatRegimenMatrimonial" IsForeignKey="true" />
+      <Association Name="ComCatSexo_ComPersona" Member="ComCatSexo" ThisKey="idComCatSexo" OtherKey="id" Type="ComCatSexo" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
