@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumRegisterState.cs" />
+    <Compile Include="EnumStatus.cs" />
+    <Compile Include="Extensible\KeyActivable\ExtensibleKeyActivable.cs" />
+    <Compile Include="Extensible\KeyActivable\ExtensibleKeyActivableRegisterState.cs" />
     <Compile Include="IBaseCatalog.cs" />
     <Compile Include="IBaseTable.cs" />
     <Compile Include="IKeyActivable.cs" />

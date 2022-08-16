@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pixir.Not.Data.Generic
 {
-    public interface IBaseCatalog : IBaseTable<int>
+    public enum EnumStatus
     {
-        String strValor { get; set; }
-        String strDescripcion { get; set; }
+        Activo = 1,
+        Inactivo = 2
     }
 }

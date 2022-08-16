@@ -82,5 +82,11 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pixir.Not.Data.Generic\Pixir.Not.Data.Generic.csproj">
+      <Project>{0440528f-f6d0-404b-b92d-63a0e237c9b4}</Project>
+      <Name>Pixir.Not.Data.Generic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
