@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pixir.Not.Data.Entity
+namespace Pixir.Not.Control
 {
-    public partial class ComDatoContacto
+    public class Class1
     {
     }
 }
