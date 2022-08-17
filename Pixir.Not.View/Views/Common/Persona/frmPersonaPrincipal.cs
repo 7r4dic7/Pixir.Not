@@ -12,6 +12,7 @@ using System.Data.Linq;
 using Pixir.Not.Control.Interface.Comun;
 using Pixir.Not.View.Extended.Disconnect.Catalog;
 using Pixir.Not.Data.Entity;
+using System.Linq.Expressions;
 
 #endregion
 namespace Pixir.Not.View.Views.Common.Persona
@@ -152,8 +153,180 @@ namespace Pixir.Not.View.Views.Common.Persona
         {
             this.lblDetalle.Location = new Point((int)Data.Extended.Enum.EnumLocation.PositionNumberFile_X,
                 (int)Data.Extended.Enum.EnumLocation.PositionNumberFile_Y);
-            this.btnSeleccionar.Visible = false
+            this.btnSeleccionar.Visible = false;
+            this.btnSalir.Visible = false;
 
+        }
+        #endregion
+
+        #region Metodo setTabIndex
+        /// <summary>
+        /// Metodo que establece el tabindex de los controles, en forma manual
+        /// </summary>
+        private void setTabIndex()
+        {
+            //Controles superiores
+            this.btnSalir.TabIndex = 1;
+            this.btnAgregar.TabIndex = 2;
+            this.pnlBusqueda.TabIndex = 3;
+            this.txtCriteria.TabIndex = 4;
+            this.btnActualizar.TabIndex = 5;
+            this.btnSeleccionar.TabIndex = 6;
+            this.btnEditar.TabIndex = 7;
+            this.btnEliminar.TabIndex = 8;
+            //Filtros
+            this.dgvFiltroComCatSexo.TabIndex = 9;
+            this.dgvFiltroComCatEstadoCivil.TabIndex = 10;
+            //Resultado
+            this.dgvResultadoPersona.TabIndex = 11;
+            //Detalle
+            this.pnlPrincipalDetalle.TabIndex = 12;
+            this.btnImprimir.TabIndex = 13;
+            //Detalle datagridview
+            this.dgvDetalleComDatoContacto.TabIndex = 14;
+            //Botones inferiores
+            this.btnSms.TabIndex = 15;
+            this.btnCorreoElectronico.TabIndex = 16;
+        }
+        #endregion
+
+        #region Metodo setDataContextRefresh
+        private void setDataContextRefresh()
+        {
+            try
+            {
+                if(this.dgvResultadoPersona.RowCount > (int)Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    this.dataContext.Refresh(RefreshMode.OverwriteCurrentValues,this.baseEntity);
+                    for (int i = 0; i < this.baseEntity.ComDatoContacto.Count; i++)
+                    {
+                        ComDatoContacto comDatoContacto = new ComDatoContacto();
+                        comDatoContacto = this.baseEntity.ComDatoContacto[i];
+                        this.dataContext.Refresh(RefreshMode.OverwriteCurrentValues, comDatoContacto);
+                    }
+                    //for (int i = 0; i < this.baseEntity.CliPersonaCliente.Count; i++)
+                    //{
+                    //    for (int j = 0; j < this.baseEntity.CliPersonaCliente[i].CliCliente.ComDatoContacto.Count; j++)
+                    //    {
+                    //        ComDatoContacto comDatoContacto = new ComDatoContacto();
+                    //        comDatoContacto = this.baseEntity.CliPersonaCliente[i].CliCliente.ComDatoContacto[j];
+                    //        this.dataContext.Refresh(RefreshMode.OverwriteCurrentValues, this.baseEntity.CliPersonaCliente[i].CliCliente.ComDatoContacto[j]);
+                    //    }
+                    //}
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+        #endregion
+
+        #region metodos setFiltro
+        private void setFiltroComCatEstadoCivil()
+        {
+            try
+            {
+                List<CatalogExchange> list = CtrlCatalogFilter.getCatalog<ComCatEstadoCivil>(this.DataContext).ToList();
+                if(list.Count == (int)Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    //this.messageFilterException = "Resources.MES_COM_CAT_ESTADO_CIVIL_VACIO;
+                    //filterExceptionPrincipal.throwExceptionInFilter();
+                }
+                list.Insert(0, new CatalogExchange()
+                {
+                    id = (int)Data.Extended.Enum.EnumNumericValue.MenosUno,
+                    strValor = Data.Extended.Enum.EnumFilterHead.TODOS.ToString()
+                });
+                dgvFiltroComCatEstadoCivil.DataSource = list;
+                dgvFiltroComCatEstadoCivil.Rows[0].Selected = true;
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+        private void setFiltroComCatSexo()
+        {
+            try
+            {
+                List<CatalogExchange> list = CtrlCatalogFilter.getCatalog<ComCatSexo>(this.DataContext).ToList();
+                if(list.Count == (int)Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    //this.messageFilterException = Resources.MES_COM_CAT_SEXO_VACIO;
+                    //filterExceptionPrincipal.throwExceptionInFilter();
+                }
+                list.Insert(0, new CatalogExchange()
+                {
+                    id = (int)Data.Extended.Enum.EnumNumericValue.MenosUno,
+                    strValor = Data.Extended.Enum.EnumFilterHead.TODOS.ToString()
+                });
+                dgvFiltroComCatSexo.DataSource = list;
+                dgvFiltroComCatSexo.Rows[0].Selected = true;
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+        #endregion
+
+        #region Metodo setResultado
+        private void setResultadoComPersona()
+        {
+            bool estadoCivilCriteria = false;
+            bool estadoSexoCriteria = false;
+            bool estadoTextoCriteria = false;
+
+            int valueEstadoCivilCriteria = (int)Data.Extended.Enum.EnumNumericValue.Cero;
+            string valueTextoCriteria = String.Empty;
+            int valueSexoCriteria = (int)Data.Extended.Enum.EnumNumericValue.Cero;
+
+            if(this.estadoCivilCriteria != null)
+            {
+                estadoCivilCriteria = true;
+                valueEstadoCivilCriteria = this.estadoCivilCriteria.id;
+            }
+            if(this.sexoCriteria != null)
+            {
+                estadoSexoCriteria = true;
+                valueSexoCriteria = this.sexoCriteria.id;
+            }
+            if (!this.txtCriteria.Text.Trim().Equals(""))
+            {
+                estadoTextoCriteria = true;
+            }
+            try
+            {
+                Expression<Func<ComPersona, bool>> predicate = c => (
+                 ((estadoCivilCriteria) ? c.ComCatEstadoCivil.id == valueEstadoCivilCriteria : true) &&
+                 ((estadoSexoCriteria) ? c.ComCatSexo.id == valueSexoCriteria : true) &&
+                 ((estadoTextoCriteria) ? (((estadoTextoCriteria) ? c.strNombreCompleto.Contains(txtCriteria.Text.Trim()) : false))
+                 : true)
+                 );
+                this.countSetResultadoGlobal++;
+                List<ComPersona> lista = this.queryCompiled.getListEntity(this.DataContext)
+                    .Where(predicate).OrderBy(p => p.strAPaterno).ToList();
+                this.dgvResultadoPersona.DataSource = lista;
+                this.lblNumeroFilas.Text = "{" + this.dgvResultadoPersona.RowCount.ToString() + "}";
+                this.busquedaSinDatos();
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+        private void limpiarSetDetalle()
+        {
+            try
+            {
+               
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         #endregion
         private void label1_Click(object sender, EventArgs e)

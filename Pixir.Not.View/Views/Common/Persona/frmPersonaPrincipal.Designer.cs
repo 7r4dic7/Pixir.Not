@@ -33,30 +33,31 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.txtCriteria = new System.Windows.Forms.TextBox();
             this.lblFiltros = new System.Windows.Forms.Label();
             this.lblResultados = new System.Windows.Forms.Label();
             this.lblDetalle = new System.Windows.Forms.Label();
             this.pnlPrincipalDetalle = new System.Windows.Forms.Panel();
+            this.dgvDetalleComDatoContacto = new System.Windows.Forms.DataGridView();
+            this.btnImprimir = new System.Windows.Forms.Button();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.pnlBusqueda = new System.Windows.Forms.Panel();
-            this.dgvFiltroComCatSexo = new System.Windows.Forms.DataGridView();
-            this.dgvComCatEstadoCivil = new System.Windows.Forms.DataGridView();
             this.dgvResultadoPersona = new System.Windows.Forms.DataGridView();
-            this.btnImprimir = new System.Windows.Forms.Button();
-            this.dgvDetalleComDatoContacto = new System.Windows.Forms.DataGridView();
+            this.dgvFiltroComCatSexo = new System.Windows.Forms.DataGridView();
+            this.dgvFiltroComCatEstadoCivil = new System.Windows.Forms.DataGridView();
             this.btnSms = new System.Windows.Forms.Button();
             this.btnCorreoElectronico = new System.Windows.Forms.Button();
+            this.lblNumeroFilas = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picModulo)).BeginInit();
             this.pnlPrincipalDetalle.SuspendLayout();
-            this.pnlBusqueda.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatSexo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvComCatEstadoCivil)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvResultadoPersona)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleComDatoContacto)).BeginInit();
+            this.pnlBusqueda.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResultadoPersona)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatSexo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatEstadoCivil)).BeginInit();
             this.SuspendLayout();
             // 
             // picModulo
@@ -97,12 +98,12 @@
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // txtBuscar
+            // txtCriteria
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(221, 46);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(294, 27);
-            this.txtBuscar.TabIndex = 4;
+            this.txtCriteria.Location = new System.Drawing.Point(221, 46);
+            this.txtCriteria.Name = "txtCriteria";
+            this.txtCriteria.Size = new System.Drawing.Size(294, 27);
+            this.txtCriteria.TabIndex = 4;
             // 
             // lblFiltros
             // 
@@ -141,6 +142,25 @@
             this.pnlPrincipalDetalle.Name = "pnlPrincipalDetalle";
             this.pnlPrincipalDetalle.Size = new System.Drawing.Size(353, 564);
             this.pnlPrincipalDetalle.TabIndex = 11;
+            // 
+            // dgvDetalleComDatoContacto
+            // 
+            this.dgvDetalleComDatoContacto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetalleComDatoContacto.Location = new System.Drawing.Point(29, 348);
+            this.dgvDetalleComDatoContacto.Name = "dgvDetalleComDatoContacto";
+            this.dgvDetalleComDatoContacto.RowHeadersWidth = 51;
+            this.dgvDetalleComDatoContacto.RowTemplate.Height = 29;
+            this.dgvDetalleComDatoContacto.Size = new System.Drawing.Size(300, 188);
+            this.dgvDetalleComDatoContacto.TabIndex = 12;
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.Location = new System.Drawing.Point(256, 31);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(94, 29);
+            this.btnImprimir.TabIndex = 11;
+            this.btnImprimir.Text = "Imprimir";
+            this.btnImprimir.UseVisualStyleBackColor = true;
             // 
             // btnActualizar
             // 
@@ -187,26 +207,6 @@
             this.pnlBusqueda.TabIndex = 16;
             this.pnlBusqueda.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlBusqueda_Paint);
             // 
-            // dgvFiltroComCatSexo
-            // 
-            this.dgvFiltroComCatSexo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFiltroComCatSexo.Location = new System.Drawing.Point(12, 125);
-            this.dgvFiltroComCatSexo.Name = "dgvFiltroComCatSexo";
-            this.dgvFiltroComCatSexo.RowHeadersWidth = 51;
-            this.dgvFiltroComCatSexo.RowTemplate.Height = 29;
-            this.dgvFiltroComCatSexo.Size = new System.Drawing.Size(190, 132);
-            this.dgvFiltroComCatSexo.TabIndex = 17;
-            // 
-            // dgvComCatEstadoCivil
-            // 
-            this.dgvComCatEstadoCivil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvComCatEstadoCivil.Location = new System.Drawing.Point(12, 263);
-            this.dgvComCatEstadoCivil.Name = "dgvComCatEstadoCivil";
-            this.dgvComCatEstadoCivil.RowHeadersWidth = 51;
-            this.dgvComCatEstadoCivil.RowTemplate.Height = 29;
-            this.dgvComCatEstadoCivil.Size = new System.Drawing.Size(190, 178);
-            this.dgvComCatEstadoCivil.TabIndex = 18;
-            // 
             // dgvResultadoPersona
             // 
             this.dgvResultadoPersona.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -217,24 +217,25 @@
             this.dgvResultadoPersona.Size = new System.Drawing.Size(395, 530);
             this.dgvResultadoPersona.TabIndex = 0;
             // 
-            // btnImprimir
+            // dgvFiltroComCatSexo
             // 
-            this.btnImprimir.Location = new System.Drawing.Point(256, 31);
-            this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(94, 29);
-            this.btnImprimir.TabIndex = 11;
-            this.btnImprimir.Text = "Imprimir";
-            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.dgvFiltroComCatSexo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFiltroComCatSexo.Location = new System.Drawing.Point(12, 125);
+            this.dgvFiltroComCatSexo.Name = "dgvFiltroComCatSexo";
+            this.dgvFiltroComCatSexo.RowHeadersWidth = 51;
+            this.dgvFiltroComCatSexo.RowTemplate.Height = 29;
+            this.dgvFiltroComCatSexo.Size = new System.Drawing.Size(190, 132);
+            this.dgvFiltroComCatSexo.TabIndex = 17;
             // 
-            // dgvDetalleComDatoContacto
+            // dgvFiltroComCatEstadoCivil
             // 
-            this.dgvDetalleComDatoContacto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetalleComDatoContacto.Location = new System.Drawing.Point(29, 348);
-            this.dgvDetalleComDatoContacto.Name = "dgvDetalleComDatoContacto";
-            this.dgvDetalleComDatoContacto.RowHeadersWidth = 51;
-            this.dgvDetalleComDatoContacto.RowTemplate.Height = 29;
-            this.dgvDetalleComDatoContacto.Size = new System.Drawing.Size(300, 188);
-            this.dgvDetalleComDatoContacto.TabIndex = 12;
+            this.dgvFiltroComCatEstadoCivil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFiltroComCatEstadoCivil.Location = new System.Drawing.Point(12, 263);
+            this.dgvFiltroComCatEstadoCivil.Name = "dgvFiltroComCatEstadoCivil";
+            this.dgvFiltroComCatEstadoCivil.RowHeadersWidth = 51;
+            this.dgvFiltroComCatEstadoCivil.RowTemplate.Height = 29;
+            this.dgvFiltroComCatEstadoCivil.Size = new System.Drawing.Size(190, 178);
+            this.dgvFiltroComCatEstadoCivil.TabIndex = 18;
             // 
             // btnSms
             // 
@@ -254,15 +255,24 @@
             this.btnCorreoElectronico.Text = "Correo Electronico";
             this.btnCorreoElectronico.UseVisualStyleBackColor = true;
             // 
+            // lblNumeroFilas
+            // 
+            this.lblNumeroFilas.AutoSize = true;
+            this.lblNumeroFilas.Location = new System.Drawing.Point(343, 15);
+            this.lblNumeroFilas.Name = "lblNumeroFilas";
+            this.lblNumeroFilas.Size = new System.Drawing.Size(0, 20);
+            this.lblNumeroFilas.TabIndex = 21;
+            // 
             // frmPersonaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(998, 719);
+            this.Controls.Add(this.lblNumeroFilas);
             this.Controls.Add(this.btnCorreoElectronico);
             this.Controls.Add(this.btnSms);
-            this.Controls.Add(this.dgvComCatEstadoCivil);
+            this.Controls.Add(this.dgvFiltroComCatEstadoCivil);
             this.Controls.Add(this.dgvFiltroComCatSexo);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnEditar);
@@ -270,7 +280,7 @@
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.lblResultados);
             this.Controls.Add(this.lblFiltros);
-            this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.txtCriteria);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.lblTitulo);
@@ -289,11 +299,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.picModulo)).EndInit();
             this.pnlPrincipalDetalle.ResumeLayout(false);
             this.pnlPrincipalDetalle.PerformLayout();
-            this.pnlBusqueda.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatSexo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvComCatEstadoCivil)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvResultadoPersona)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleComDatoContacto)).EndInit();
+            this.pnlBusqueda.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResultadoPersona)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatSexo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatEstadoCivil)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,7 +315,7 @@
         private Label lblTitulo;
         private Button btnSalir;
         private Button btnAgregar;
-        private TextBox txtBuscar;
+        private TextBox txtCriteria;
         private Label lblFiltros;
         private Label lblResultados;
         private Label lblDetalle;
@@ -316,11 +326,12 @@
         private Button btnEliminar;
         private Panel pnlBusqueda;
         private DataGridView dgvFiltroComCatSexo;
-        private DataGridView dgvComCatEstadoCivil;
+        private DataGridView dgvFiltroComCatEstadoCivil;
         private DataGridView dgvResultadoPersona;
         private DataGridView dgvDetalleComDatoContacto;
         private Button btnImprimir;
         private Button btnSms;
         private Button btnCorreoElectronico;
+        private Label lblNumeroFilas;
     }
 }

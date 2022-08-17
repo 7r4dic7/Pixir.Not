@@ -57,7 +57,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DcGeneral.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Extended\Enum\EnumFilterHead.cs" />
     <Compile Include="Extended\Enum\EnumLocation.cs" />
+    <Compile Include="Extended\Enum\EnumNationality.cs" />
     <Compile Include="Extended\Enum\EnumNumericValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

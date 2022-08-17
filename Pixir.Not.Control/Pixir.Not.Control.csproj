@@ -43,9 +43,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="CtrlGeneric.cs" />
     <Compile Include="Interface\Comun\IControlRegister.cs" />
     <Compile Include="Interface\Comun\IRegisterRules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pixir.Not.Data.Generic\Pixir.Not.Data.Generic.csproj">
+      <Project>{0440528f-f6d0-404b-b92d-63a0e237c9b4}</Project>
+      <Name>Pixir.Not.Data.Generic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
