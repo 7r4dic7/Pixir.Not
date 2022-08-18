@@ -51,6 +51,31 @@
             this.btnSms = new System.Windows.Forms.Button();
             this.btnCorreoElectronico = new System.Windows.Forms.Button();
             this.lblNumeroFilas = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lblNombrePrincipal = new System.Windows.Forms.Label();
+            this.lblNombreMuestra = new System.Windows.Forms.Label();
+            this.lblFechaNacimientoMuestra = new System.Windows.Forms.Label();
+            this.lblSexoMuestra = new System.Windows.Forms.Label();
+            this.lblEstadoCivilMuestra = new System.Windows.Forms.Label();
+            this.lblRegimenMatrimonialMuestra = new System.Windows.Forms.Label();
+            this.lblOcupacionMuestra = new System.Windows.Forms.Label();
+            this.lblCurpMuestra = new System.Windows.Forms.Label();
+            this.lblFolioIfeMuestra = new System.Windows.Forms.Label();
+            this.lblOriginarioMuestra = new System.Windows.Forms.Label();
+            this.lblNacionalidadMuestra = new System.Windows.Forms.Label();
+            this.lblDocLegEstMuestra = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picModulo)).BeginInit();
             this.pnlPrincipalDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleComDatoContacto)).BeginInit();
@@ -96,14 +121,15 @@
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.button1_Click);
+            
             // 
             // txtCriteria
             // 
-            this.txtCriteria.Location = new System.Drawing.Point(221, 46);
+            this.txtCriteria.Location = new System.Drawing.Point(245, 2);
             this.txtCriteria.Name = "txtCriteria";
             this.txtCriteria.Size = new System.Drawing.Size(294, 27);
             this.txtCriteria.TabIndex = 4;
+            
             // 
             // lblFiltros
             // 
@@ -131,10 +157,35 @@
             this.lblDetalle.Size = new System.Drawing.Size(57, 20);
             this.lblDetalle.TabIndex = 10;
             this.lblDetalle.Text = "Detalle";
-            this.lblDetalle.Click += new System.EventHandler(this.lblDetalle_Click);
+            
             // 
             // pnlPrincipalDetalle
             // 
+            this.pnlPrincipalDetalle.Controls.Add(this.lblDocLegEstMuestra);
+            this.pnlPrincipalDetalle.Controls.Add(this.lblNacionalidadMuestra);
+            this.pnlPrincipalDetalle.Controls.Add(this.lblOriginarioMuestra);
+            this.pnlPrincipalDetalle.Controls.Add(this.lblFolioIfeMuestra);
+            this.pnlPrincipalDetalle.Controls.Add(this.lblCurpMuestra);
+            this.pnlPrincipalDetalle.Controls.Add(this.lblOcupacionMuestra);
+            this.pnlPrincipalDetalle.Controls.Add(this.lblRegimenMatrimonialMuestra);
+            this.pnlPrincipalDetalle.Controls.Add(this.lblEstadoCivilMuestra);
+            this.pnlPrincipalDetalle.Controls.Add(this.lblSexoMuestra);
+            this.pnlPrincipalDetalle.Controls.Add(this.lblFechaNacimientoMuestra);
+            this.pnlPrincipalDetalle.Controls.Add(this.lblNombreMuestra);
+            this.pnlPrincipalDetalle.Controls.Add(this.lblNombrePrincipal);
+            this.pnlPrincipalDetalle.Controls.Add(this.label13);
+            this.pnlPrincipalDetalle.Controls.Add(this.label12);
+            this.pnlPrincipalDetalle.Controls.Add(this.label11);
+            this.pnlPrincipalDetalle.Controls.Add(this.label10);
+            this.pnlPrincipalDetalle.Controls.Add(this.label9);
+            this.pnlPrincipalDetalle.Controls.Add(this.label8);
+            this.pnlPrincipalDetalle.Controls.Add(this.label7);
+            this.pnlPrincipalDetalle.Controls.Add(this.label6);
+            this.pnlPrincipalDetalle.Controls.Add(this.label5);
+            this.pnlPrincipalDetalle.Controls.Add(this.label4);
+            this.pnlPrincipalDetalle.Controls.Add(this.label3);
+            this.pnlPrincipalDetalle.Controls.Add(this.label2);
+            this.pnlPrincipalDetalle.Controls.Add(this.label1);
             this.pnlPrincipalDetalle.Controls.Add(this.dgvDetalleComDatoContacto);
             this.pnlPrincipalDetalle.Controls.Add(this.btnImprimir);
             this.pnlPrincipalDetalle.Controls.Add(this.lblDetalle);
@@ -201,20 +252,21 @@
             // pnlBusqueda
             // 
             this.pnlBusqueda.Controls.Add(this.dgvResultadoPersona);
+            this.pnlBusqueda.Controls.Add(this.txtCriteria);
             this.pnlBusqueda.Location = new System.Drawing.Point(4, 46);
             this.pnlBusqueda.Name = "pnlBusqueda";
             this.pnlBusqueda.Size = new System.Drawing.Size(982, 612);
             this.pnlBusqueda.TabIndex = 16;
-            this.pnlBusqueda.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlBusqueda_Paint);
+            
             // 
             // dgvResultadoPersona
             // 
             this.dgvResultadoPersona.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResultadoPersona.Location = new System.Drawing.Point(204, 31);
+            this.dgvResultadoPersona.Location = new System.Drawing.Point(204, 79);
             this.dgvResultadoPersona.Name = "dgvResultadoPersona";
             this.dgvResultadoPersona.RowHeadersWidth = 51;
             this.dgvResultadoPersona.RowTemplate.Height = 29;
-            this.dgvResultadoPersona.Size = new System.Drawing.Size(395, 530);
+            this.dgvResultadoPersona.Size = new System.Drawing.Size(395, 482);
             this.dgvResultadoPersona.TabIndex = 0;
             // 
             // dgvFiltroComCatSexo
@@ -263,6 +315,220 @@
             this.lblNumeroFilas.Size = new System.Drawing.Size(0, 20);
             this.lblNumeroFilas.TabIndex = 21;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(82, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(183, 20);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Informacion de la persona";
+            
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(0, 60);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(113, 20);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "[Datos Persona]";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 91);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 20);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Nombre:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 111);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(128, 20);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Fecha nacimiento:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 131);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 20);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Sexo:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 151);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(87, 20);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Estado civil:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 171);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(156, 20);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Regimen matrimonial:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 191);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(83, 20);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Ocupacion:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 211);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 20);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "CURP:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 231);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(68, 20);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Folio IFE:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 251);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(79, 20);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Originario:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 271);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(101, 20);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "Nacionalidad:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 291);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(137, 20);
+            this.label13.TabIndex = 25;
+            this.label13.Text = "Doc. legal estancia:";
+            // 
+            // lblNombrePrincipal
+            // 
+            this.lblNombrePrincipal.AutoSize = true;
+            this.lblNombrePrincipal.Location = new System.Drawing.Point(3, 40);
+            this.lblNombrePrincipal.Name = "lblNombrePrincipal";
+            this.lblNombrePrincipal.Size = new System.Drawing.Size(0, 20);
+            this.lblNombrePrincipal.TabIndex = 26;
+            // 
+            // lblNombreMuestra
+            // 
+            this.lblNombreMuestra.AutoSize = true;
+            this.lblNombreMuestra.Location = new System.Drawing.Point(159, 91);
+            this.lblNombreMuestra.Name = "lblNombreMuestra";
+            this.lblNombreMuestra.Size = new System.Drawing.Size(0, 20);
+            this.lblNombreMuestra.TabIndex = 27;
+            // 
+            // lblFechaNacimientoMuestra
+            // 
+            this.lblFechaNacimientoMuestra.AutoSize = true;
+            this.lblFechaNacimientoMuestra.Location = new System.Drawing.Point(159, 111);
+            this.lblFechaNacimientoMuestra.Name = "lblFechaNacimientoMuestra";
+            this.lblFechaNacimientoMuestra.Size = new System.Drawing.Size(0, 20);
+            this.lblFechaNacimientoMuestra.TabIndex = 28;
+            // 
+            // lblSexoMuestra
+            // 
+            this.lblSexoMuestra.AutoSize = true;
+            this.lblSexoMuestra.Location = new System.Drawing.Point(159, 131);
+            this.lblSexoMuestra.Name = "lblSexoMuestra";
+            this.lblSexoMuestra.Size = new System.Drawing.Size(0, 20);
+            this.lblSexoMuestra.TabIndex = 29;
+            // 
+            // lblEstadoCivilMuestra
+            // 
+            this.lblEstadoCivilMuestra.AutoSize = true;
+            this.lblEstadoCivilMuestra.Location = new System.Drawing.Point(159, 151);
+            this.lblEstadoCivilMuestra.Name = "lblEstadoCivilMuestra";
+            this.lblEstadoCivilMuestra.Size = new System.Drawing.Size(0, 20);
+            this.lblEstadoCivilMuestra.TabIndex = 30;
+            // 
+            // lblRegimenMatrimonialMuestra
+            // 
+            this.lblRegimenMatrimonialMuestra.AutoSize = true;
+            this.lblRegimenMatrimonialMuestra.Location = new System.Drawing.Point(159, 171);
+            this.lblRegimenMatrimonialMuestra.Name = "lblRegimenMatrimonialMuestra";
+            this.lblRegimenMatrimonialMuestra.Size = new System.Drawing.Size(0, 20);
+            this.lblRegimenMatrimonialMuestra.TabIndex = 31;
+            // 
+            // lblOcupacionMuestra
+            // 
+            this.lblOcupacionMuestra.AutoSize = true;
+            this.lblOcupacionMuestra.Location = new System.Drawing.Point(159, 191);
+            this.lblOcupacionMuestra.Name = "lblOcupacionMuestra";
+            this.lblOcupacionMuestra.Size = new System.Drawing.Size(0, 20);
+            this.lblOcupacionMuestra.TabIndex = 32;
+            // 
+            // lblCurpMuestra
+            // 
+            this.lblCurpMuestra.AutoSize = true;
+            this.lblCurpMuestra.Location = new System.Drawing.Point(159, 211);
+            this.lblCurpMuestra.Name = "lblCurpMuestra";
+            this.lblCurpMuestra.Size = new System.Drawing.Size(0, 20);
+            this.lblCurpMuestra.TabIndex = 33;
+            // 
+            // lblFolioIfeMuestra
+            // 
+            this.lblFolioIfeMuestra.AutoSize = true;
+            this.lblFolioIfeMuestra.Location = new System.Drawing.Point(159, 231);
+            this.lblFolioIfeMuestra.Name = "lblFolioIfeMuestra";
+            this.lblFolioIfeMuestra.Size = new System.Drawing.Size(0, 20);
+            this.lblFolioIfeMuestra.TabIndex = 34;
+            // 
+            // lblOriginarioMuestra
+            // 
+            this.lblOriginarioMuestra.AutoSize = true;
+            this.lblOriginarioMuestra.Location = new System.Drawing.Point(159, 251);
+            this.lblOriginarioMuestra.Name = "lblOriginarioMuestra";
+            this.lblOriginarioMuestra.Size = new System.Drawing.Size(0, 20);
+            this.lblOriginarioMuestra.TabIndex = 35;
+            // 
+            // lblNacionalidadMuestra
+            // 
+            this.lblNacionalidadMuestra.AutoSize = true;
+            this.lblNacionalidadMuestra.Location = new System.Drawing.Point(159, 271);
+            this.lblNacionalidadMuestra.Name = "lblNacionalidadMuestra";
+            this.lblNacionalidadMuestra.Size = new System.Drawing.Size(0, 20);
+            this.lblNacionalidadMuestra.TabIndex = 36;
+            // 
+            // lblDocLegEstMuestra
+            // 
+            this.lblDocLegEstMuestra.AutoSize = true;
+            this.lblDocLegEstMuestra.Location = new System.Drawing.Point(159, 291);
+            this.lblDocLegEstMuestra.Name = "lblDocLegEstMuestra";
+            this.lblDocLegEstMuestra.Size = new System.Drawing.Size(0, 20);
+            this.lblDocLegEstMuestra.TabIndex = 37;
+            // 
             // frmPersonaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -280,7 +546,6 @@
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.lblResultados);
             this.Controls.Add(this.lblFiltros);
-            this.Controls.Add(this.txtCriteria);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.lblTitulo);
@@ -295,12 +560,13 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmPersonaPrincipal";
-            this.Load += new System.EventHandler(this.frmPersonaPrincipal_Load);
+            
             ((System.ComponentModel.ISupportInitialize)(this.picModulo)).EndInit();
             this.pnlPrincipalDetalle.ResumeLayout(false);
             this.pnlPrincipalDetalle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleComDatoContacto)).EndInit();
             this.pnlBusqueda.ResumeLayout(false);
+            this.pnlBusqueda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultadoPersona)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatSexo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatEstadoCivil)).EndInit();
@@ -333,5 +599,30 @@
         private Button btnSms;
         private Button btnCorreoElectronico;
         private Label lblNumeroFilas;
+        private Label label13;
+        private Label label12;
+        private Label label11;
+        private Label label10;
+        private Label label9;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        private Label label5;
+        private Label label4;
+        private Label label3;
+        private Label label2;
+        private Label label1;
+        private Label lblDocLegEstMuestra;
+        private Label lblNacionalidadMuestra;
+        private Label lblOriginarioMuestra;
+        private Label lblFolioIfeMuestra;
+        private Label lblCurpMuestra;
+        private Label lblOcupacionMuestra;
+        private Label lblRegimenMatrimonialMuestra;
+        private Label lblEstadoCivilMuestra;
+        private Label lblSexoMuestra;
+        private Label lblFechaNacimientoMuestra;
+        private Label lblNombreMuestra;
+        private Label lblNombrePrincipal;
     }
 }

@@ -13,6 +13,8 @@ using Pixir.Not.Control.Interface.Comun;
 using Pixir.Not.View.Extended.Disconnect.Catalog;
 using Pixir.Not.Data.Entity;
 using System.Linq.Expressions;
+using Pixir.Not.View.Properties;
+using Pixir.Not.Control;
 
 #endregion
 namespace Pixir.Not.View.Views.Common.Persona
@@ -20,7 +22,7 @@ namespace Pixir.Not.View.Views.Common.Persona
     /// <summary>
     /// 
     /// </summary>
-    public partial class frmPersonaPrincipal : Form, IControlRegister<Data.Entity.ComPersona>
+    public partial class frmPersonaPrincipal : Form, IControlRegister<ComPersona>
     {
         #region Variables
         /// <summary>
@@ -136,7 +138,7 @@ namespace Pixir.Not.View.Views.Common.Persona
                 this.DataContext = new DcGeneralDataContext();
                 this.setFiltroComCatEstadoCivil();
                 this.setFiltroComCatSexo();
-                this.setresultadoComPersona();
+                this.setResultadoComPersona();
                 this.hidePanelMessage();
                 this.setStatus();
                 this.setTabIndex();
@@ -222,7 +224,7 @@ namespace Pixir.Not.View.Views.Common.Persona
         }
         #endregion
 
-        #region metodos setFiltro
+        #region Metodos setFiltro
         private void setFiltroComCatEstadoCivil()
         {
             try
@@ -316,47 +318,328 @@ namespace Pixir.Not.View.Views.Common.Persona
                 MessageBox.Show(_e.Message);
             }
         }
+        /// <summary>
+        /// Limpia las etiquetas y los data gridviews de el area de detalle, si no existiese
+        /// coincidencia en los datos de busqueda
+        /// </summary>
         private void limpiarSetDetalle()
         {
             try
             {
-               
+                this.lblNombrePrincipal.Text = String.Empty;
+                this.lblNombreMuestra.Text = String.Empty;
+                this.lblCurpMuestra.Text = String.Empty;
+                this.lblFolioIfeMuestra.Text = String.Empty;
+                this.lblOriginarioMuestra.Text = String.Empty;
+                this.lblFechaNacimientoMuestra.Text = String.Empty;
+                this.lblDocLegEstMuestra.Text = String.Empty;
+                this.lblNacionalidadMuestra.Text = String.Empty;
+                this.lblOcupacionMuestra.Text = String.Empty;
+                this.lblSexoMuestra.Text = String.Empty;
+                this.lblRegimenMatrimonialMuestra.Text = String.Empty;
+                this.lblEstadoCivilMuestra.Text = String.Empty;
+                this.dgvDetalleComDatoContacto.Rows.Clear();
             }
-            catch (Exception)
+            catch (Exception _e)
             {
-
-                throw;
+                MessageBox.Show(_e.Message);
+            }
+        }
+        /// <summary>
+        /// Metodo que limpia el area de detalle y muesta la el error provider que indica que no existe
+        /// datos para la consulta.
+        /// </summary>
+        private void busquedaSinDatos()
+        {
+            try
+            {
+                if (countSetResultadoGlobal >= (int)Not.Data.Extended.Enum.EnumNumericValue.Uno)
+                {
+                    if (this.dgvResultadoPersona.Container == null &&
+                        this.dgvResultadoPersona.Rows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                    {
+                        this.limpiarSetDetalle();
+                        //this.eprAvisoBusqueda.SetError(this.pnlBusqueda, Resources.MES_BUSQUEDA_VACIA);
+                    }
+                    else
+                    {
+                       // this.eprAvisoBusqueda.SetError(this.pnlBusqueda, String.Empty);
+                    }
+                }
+                else
+                {
+                    //this.eprAvisoBusqueda.SetError(this.pnlBusqueda, String.Empty);
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
             }
         }
         #endregion
-        private void label1_Click(object sender, EventArgs e)
+        #region Metodos setDetalle
+
+        private void loadEntity(ComPersona _entity)
         {
+            this.baseEntity = _entity;
+
+            this.setDetalleTextBox(_entity);
+            this.setDetalleComboBox(_entity);
+            this.setDetalleDateTime(_entity);
+            this.setDetalleCheckBox(_entity);
+            this.setDetalleDataGridView(_entity);
 
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void setDetalleTextBox(ComPersona _entity)
         {
+            try
+            {
+
+                this.lblNombrePrincipal.Text = _entity.strAPaterno + " " + _entity.strAMaterno + " " +
+                     _entity.strNombre ?? String.Empty;
+                this.lblNombreMuestra.Text = _entity.strAPaterno + " " + _entity.strAMaterno + " " +
+                     _entity.strNombre ?? String.Empty;
+                this.lblCurpMuestra.Text = _entity.strCURP ?? String.Empty;
+                this.lblFolioIfeMuestra.Text = _entity.strFolioIFE ?? String.Empty;
+                this.lblOriginarioMuestra.Text = _entity.strOriginario ?? String.Empty;
+
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void setDetalleDateTime(ComPersona _entity)
+        {
+            try
+            {
+                this.lblFechaNacimientoMuestra.Text = (_entity.dteFechaNacimiento == null) ? " " :
+                    _entity.dteFechaNacimiento.Value.ToShortDateString();
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void setDetalleCheckBox(ComPersona _entity)
+        {
+            try
+            {
+                if (_entity.ComCatNacionalidad != null)
+                {
+                    //muestra los datos si la nacionalidad es diferente de mexicana
+                    if (!_entity.ComCatNacionalidad.strValor.Equals(Not.Data.Extended.Enum.EnumNationality.MEXICANA.ToString()))
+                    {
+                        this.lblDocLegEstMuestra.Text = ((_entity.bitDocEstancia == false) ? "No" : "Si");
+                    }
+                    else
+                    {
+                        this.lblDocLegEstMuestra.Text = String.Empty;
+                    }
+                }
+                else
+                {
+                    this.lblDocLegEstMuestra.Text = String.Empty;
+                }
+
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void setDetalleComboBox(ComPersona _entity)
+        {
+            try
+            {
+
+                if (_entity.ComCatNacionalidad != null)
+                {
+                    this.lblNacionalidadMuestra.Text = _entity.ComCatNacionalidad.strValor ?? String.Empty;
+                }
+                else
+                {
+                    this.lblNacionalidadMuestra.Text = String.Empty;
+                }
+                if (_entity.ComCatOcupacion != null)
+                {
+                    this.lblOcupacionMuestra.Text = _entity.ComCatOcupacion.strValor ?? String.Empty;
+                }
+                else
+                {
+                    this.lblOcupacionMuestra.Text = String.Empty;
+
+                }
+
+                if (_entity.ComCatSexo != null)
+                {
+                    this.lblSexoMuestra.Text = _entity.ComCatSexo.strValor ?? String.Empty;
+                }
+                else
+                {
+                    this.lblSexoMuestra.Text = String.Empty;
+                }
+
+                if (_entity.ComCatRegimenMatrimonial != null)
+                {
+                    this.lblRegimenMatrimonialMuestra.Text = _entity.ComCatRegimenMatrimonial.strValor ?? String.Empty;
+
+                }
+                else
+                {
+                    this.lblRegimenMatrimonialMuestra.Text = String.Empty;
+                }
+                if (_entity.ComCatEstadoCivil != null)
+                {
+                    this.lblEstadoCivilMuestra.Text = _entity.ComCatEstadoCivil.strValor ?? String.Empty;
+
+                }
+                else
+                {
+                    this.lblEstadoCivilMuestra.Text = String.Empty;
+                }
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void setDetalleDataGridView(ComPersona _entity)
+        {
+            try
+            {
+                //Contacto
+                //Expression<Func<CliPersonaCliente, bool>> predicateCliente = c => c.ComPersona.id == _entity.id;
+                //CliPersonaCliente personaCliente = Not.Control.CtrlGeneric.getItemByExpresssion<CliPersonaCliente>(this.DataContext, predicateCliente);
+                //bool isCliente = (personaCliente != null) ? true : false;
+                //List<ComDatoContacto> comDatoContacto = new List<ComDatoContacto>();
+                //Expression<Func<ComDatoContacto, bool>> predicateDatoContactoPersona = c => c.ComPersona.id == _entity.id;
+                //Expression<Func<ComDatoContacto, bool>> predicateDatoContactoCliente = c => c.CliCliente.id == personaCliente.CliCliente.id && c.ComPersona == null;
+
+                //comDatoContacto = Not.Control.CtrlGeneric.getListByExpression<ComDatoContacto>(this.DataContext, predicateDatoContactoPersona).ToList();
+                //if (isCliente)
+                //{
+                //    comDatoContacto.AddRange(Not.Control.CtrlGeneric.getListByExpression<ComDatoContacto>(this.DataContext, predicateDatoContactoCliente).ToList());
+                //}
+                //this.dgvDetalleComDatoContacto.DataSource = comDatoContacto;
+
+            }
+            catch (Exception _e)
+            {
+                this.limpiarSetDetalle();
+                MessageBox.Show(_e.Message);
+            }
+
+        }
+        #endregion
+
+        #region frmClientePersonaPrincipal
+        private void txtCriteria_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.textoCriteria = txtCriteria.Text.Trim();
+                if (txtCriteria.Text.Trim().Equals(String.Empty))
+                {
+                    this.textoCriteria = null;
+                }
+
+                this.setResultadoComPersona();
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmPersonaManager view = new frmPersonaManager();
+                DataContext dataContextTemp = new DcGeneralDataContext();
+
+                Not.Data.Entity.ComPersona entity = view.show(this, dataContextTemp, Not.Data.Extended.Enum.EnumOperationType.Agregar, this.segUsuario, null);
+
+                if (entity != null)
+                {
+                    dataContextTemp.SubmitChanges();
+                    //this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_GUARDAR);
+                    this.setResultadoComPersona();
+                    dataContextTemp = null;
+                }
+                else
+                {
+                    this.setDataContextRefresh();
+                    this.setResultadoComPersona();
+                }
+                this.btnAgregar.Focus();
+
+            }
+            catch (Exception _e)
+            {
+               // if (this.conexionExceptionPrincipal.messajeConexionException(_e, this)) { return; }
+                MessageBox.Show(_e.Message);
+            }
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnEditar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                    //    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    if (this.baseEntity != null)
+                    {
+                        frmPersonaManager view = new frmPersonaManager();
+                        DataContext dataContextTemp = new DcGeneralDataContext();
+                        ComPersona persona = (ComPersona)this.dgvResultadoPersona.SelectedRows[0].DataBoundItem;
+                        Expression<Func<ComPersona, bool>> predicate = c => c.id == persona.id;
+                        ComPersona person = CtrlGeneric.getItemByExpression<ComPersona>(dataContextTemp, predicate);
 
+                        if (view.show(this, person, dataContextTemp, Not.Data.Extended.Enum.EnumOperationType.Editar, null) != null)
+                        {
+                            dataContextTemp.SubmitChanges();
+                            //this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_EDITAR);
+                            this.setDataContextRefresh();
+                            this.setResultadoComPersona();
+                            dataContextTemp = null;
+                        }
+                        else
+                        {
+                            this.setDataContextRefresh();
+                            this.setResultadoComPersona();
+                        }
+                    }
+                    else
+                    {
+                        //MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_ENTIDAD_VACIA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        // MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
         }
 
-        private void frmPersonaPrincipal_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlBusqueda_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblDetalle_Click(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }
