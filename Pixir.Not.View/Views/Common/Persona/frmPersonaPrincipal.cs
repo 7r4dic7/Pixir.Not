@@ -640,6 +640,233 @@ namespace Pixir.Not.View.Views.Common.Persona
             }
         }
 
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    //MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_SELECCIONAR_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR,
+                    //    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                   // DialogResult result = MessageBox.Show(Control.Comun.Properties.Resources.PRE_ELIMINAR_REGISTRO, Resources.TIT_PERSONA_SINGULAR, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    //if (result == DialogResult.Yes)
+                    //{
+
+                    //    this.dataContextDelete = new DCGeneralDataContext();
+                    //    ComPersona persona = (ComPersona)this.dgvResultadoPersona.SelectedRows[0].DataBoundItem;
+                    //    ComPersona person = this.dataContextDelete.GetTable<ComPersona>().Single(c => c.id == persona.id);
+                    //    this.dataContextDelete.GetTable<Not.Data.Entity.ComPersona>().DeleteOnSubmit(person);
+                    //    this.dataContextDelete.SubmitChanges();
+                    //    this.setResultadoComPersona();
+                    //    this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_ELIMINAR);
+                    //    this.dataContextDelete = null;
+                    //}
+                }
+            }
+            catch (Exception _e)
+            {
+                this.dataContextDelete = null;
+                //if (_e.sqlExceptionDelete(this)) { return; }
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                    //    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    this.setDataContextRefresh();
+                    this.setResultadoComPersona();
+                    //this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_ACTUALIZAR);
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                    //    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    if (this.baseEntity != null)
+                    {
+                        //frmPersonaReport view = new frmPersonaReport();
+                        //view.Show(this, this.baseEntity, this.dataContext);
+                    }
+                    else
+                    {
+                        //MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_ENTIDAD_VACIA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        // MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Metodo que verifica que la empresa no se haya asignado anterior mente como cobDeposito
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSeleccionar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvResultadoPersona.SelectedRows.Count > (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    if (this.baseEntity == null)
+                    {
+                        //MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_SELECCIONAR_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        //    MessageBoxIcon.Error);
+                        return;
+                    }
+                    this.buttonSelect = true;
+                    if (this.reglasSeleccion != null)
+                    {
+                        foreach (IRegisterRules regla in this.reglasSeleccion)
+                        {
+                            if (!regla.validaRegistro(this.baseEntity, dataContext))
+                            {
+                                //MessageBox.Show(this, regla.Mensaje, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                               // this.asignData = true;
+                                this.buttonSelect = false;
+                                break;
+
+                            }
+                            else
+                            {
+                               // this.asignData = false;
+                                this.Close();
+                                break;
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+
+        }
+
+        private void btnSms_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                    //    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    if (this.baseEntity != null)
+                    {
+                        //if (this.segUsuario != null)
+                        //{
+                        //    CatalogoEnvio catalogoEnvio = new CatalogoEnvio();
+                        //    catalogoEnvio.IdSegModulo = (int)Not.Data.Extended.Enum.EnumSegModulo.PERSONA;
+                        //    catalogoEnvio.IdConCatTabla = (int)Not.Data.Extended.Enum.EnumConCatTabla.ComPersona;
+                        //    catalogoEnvio.IntId = this.baseEntity.id;
+                        //    frmSmsEnvioManualManager view = new frmSmsEnvioManualManager();
+                        //    view.show(this, this.baseEntity, this.segUsuario, catalogoEnvio, this.DataContext, Not.Data.Extended.Enum.EnumOperationType.Editar);
+                        //}
+                        //if (this.segUsuario == null)
+                        //{
+                        //    MessageBox.Show(this, Resources.MES_USUARIO_INVALIDO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        //        MessageBoxIcon.Information);
+                        //}
+                    }
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+
+        }
+
+        private void btnCorreoElectronico_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                    //    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    if (this.baseEntity != null)
+                    {
+
+                        //CatalogoEnvio catalogoEnvio = new CatalogoEnvio();
+                        //catalogoEnvio.IdSegModulo = (int)Not.Data.Extended.Enum.EnumSegModulo.PERSONA;
+                        //catalogoEnvio.IdConCatTabla = (int)Not.Data.Extended.Enum.EnumConCatTabla.ComPersona;
+                        //catalogoEnvio.IntId = this.baseEntity.id;
+                        //Not.View.Views.Common.EMail.frmEMailEnvioManualManager view = new Not.View.Views.Common.EMail.frmEMailEnvioManualManager();
+                        //view.show(this, this.baseEntity, this.segUsuario, catalogoEnvio, this.DataContext, Not.Data.Extended.Enum.EnumOperationType.Editar);
+                    }
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+
+
+
+        }
+
+        /// <summary>
+        /// Evento que cierra la pantalla, cuando se asignan datos a otro Proceso
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.buttonExit = true;
+                this.Close();
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
         #endregion
     }
 }
