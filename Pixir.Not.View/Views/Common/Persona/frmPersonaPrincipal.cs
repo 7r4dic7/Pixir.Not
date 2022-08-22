@@ -49,6 +49,12 @@ namespace Pixir.Not.View.Views.Common.Persona
         /// Variable del tipo System.Windows.Forms.Timer
         /// </summary>
         System.Windows.Forms.Timer clock = new System.Windows.Forms.Timer();
+
+        /// <summary>
+        /// Variable  de tipo PermisosPantalla. Contioene la logica de los permisos.
+        /// </summary>
+        //private PermisosPantalla permisosPantalla = null;
+
         /// <summary>
         /// Variable que contiene todas las instancias de la interface que se implementan
         /// </summary>
@@ -865,6 +871,132 @@ namespace Pixir.Not.View.Views.Common.Persona
             {
                 MessageBox.Show(_e.Message);
             }
+        }
+
+        #endregion
+        #region Eventos DatagridView
+        private void dgvFiltroComCatEstadoCivil_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                this.estadoCivilCriteria = (CatalogExchange)this.dgvFiltroComCatEstadoCivil.Rows[e.RowIndex].DataBoundItem;
+                if (this.estadoCivilCriteria.id == (int)Not.Data.Extended.Enum.EnumNumericValue.MenosUno)
+                {
+                    this.estadoCivilCriteria = null;
+                }
+                this.setResultadoComPersona();
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+
+        }
+
+        private void dgvFiltroComCatSexo_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+
+                this.sexoCriteria = (CatalogExchange)this.dgvFiltroComCatSexo.Rows[e.RowIndex].DataBoundItem;
+                if (this.sexoCriteria.id == (int)Not.Data.Extended.Enum.EnumNumericValue.MenosUno)
+                {
+                    this.sexoCriteria = null;
+                }
+                this.setResultadoComPersona();
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void dgvResultadoPersona_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                this.loadEntity((ComPersona)this.dgvResultadoPersona.Rows[e.RowIndex].DataBoundItem);
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void cellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                ((DataGridView)sender).Rows[e.RowIndex].Selected = true;
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+        #endregion
+        #region metodos setMensaje
+        private void hidePanelMessage()
+        {
+            try
+            {
+                this.pnlMesOperacion.setLocation();
+                this.pnlMesOperacion.setSize();
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void setTimer()
+        {
+            try
+            {
+                clock.Tick += new EventHandler(timMenOperacion_Tick);
+                clock.Enabled = true;
+                clock.Interval = (int)Data.Extended.Enum.EnumTime.IntervaloMensajePrincipal;
+                clock.Start();
+
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+
+        }
+
+        private void getPanel(String _message)
+        {
+            try
+            {
+                PanelMessagePrincipal.setVisiblePanelAndLabel(this.pnlMesOperacion, this.lblMensajeOperacion, _message);
+                this.setTimer();
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void timMenOperacion_Tick(object sender, EventArgs e)
+        {
+            this.hidePanelMessage();
+        }
+        #endregion
+
+        #region setPermiso
+        private void setPermisosPantalla()
+        {
+            //this.btnAgregar.Visible = this.permisosPantalla.Agregar;
+            //this.btnEditar.Visible = this.permisosPantalla.Editar;
+            //this.btnEliminar.Visible = this.permisosPantalla.Eliminar;
+            //this.btnImprimir.Visible = this.permisosPantalla.Imprimir;
+            //this.btnSms.Visible = this.permisosPantalla.Sms;
+            //this.btnCorreoElectronico.Visible = this.permisosPantalla.Mail;
+
         }
 
         #endregion
