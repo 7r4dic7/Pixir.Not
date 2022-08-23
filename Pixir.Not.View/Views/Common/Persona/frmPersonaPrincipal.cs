@@ -383,6 +383,7 @@ namespace Pixir.Not.View.Views.Common.Persona
             }
         }
         #endregion
+
         #region Metodos setDetalle
 
         private void loadEntity(ComPersona _entity)
@@ -874,6 +875,7 @@ namespace Pixir.Not.View.Views.Common.Persona
         }
 
         #endregion
+
         #region Eventos DatagridView
         private void dgvFiltroComCatEstadoCivil_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -936,6 +938,7 @@ namespace Pixir.Not.View.Views.Common.Persona
             }
         }
         #endregion
+
         #region metodos setMensaje
         private void hidePanelMessage()
         {

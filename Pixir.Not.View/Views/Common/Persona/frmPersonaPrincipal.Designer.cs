@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPersonaPrincipal));
             this.picModulo = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new System.Windows.Forms.Label();
@@ -70,22 +71,24 @@
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.pnlBusqueda = new System.Windows.Forms.Panel();
+            this.pnlMesOperacion = new System.Windows.Forms.Panel();
+            this.lblMensajeOperacion = new System.Windows.Forms.Label();
             this.dgvResultadoPersona = new System.Windows.Forms.DataGridView();
             this.dgvFiltroComCatSexo = new System.Windows.Forms.DataGridView();
             this.dgvFiltroComCatEstadoCivil = new System.Windows.Forms.DataGridView();
             this.btnSms = new System.Windows.Forms.Button();
             this.btnCorreoElectronico = new System.Windows.Forms.Button();
             this.lblNumeroFilas = new System.Windows.Forms.Label();
-            this.pnlMesOperacion = new System.Windows.Forms.Panel();
-            this.lblMensajeOperacion = new System.Windows.Forms.Label();
+            this.dataGridViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picModulo)).BeginInit();
             this.pnlPrincipalDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleComDatoContacto)).BeginInit();
             this.pnlBusqueda.SuspendLayout();
+            this.pnlMesOperacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultadoPersona)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatSexo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatEstadoCivil)).BeginInit();
-            this.pnlMesOperacion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // picModulo
@@ -472,6 +475,23 @@
             this.pnlBusqueda.Size = new System.Drawing.Size(982, 612);
             this.pnlBusqueda.TabIndex = 16;
             // 
+            // pnlMesOperacion
+            // 
+            this.pnlMesOperacion.Controls.Add(this.lblMensajeOperacion);
+            this.pnlMesOperacion.Location = new System.Drawing.Point(8, 412);
+            this.pnlMesOperacion.Name = "pnlMesOperacion";
+            this.pnlMesOperacion.Size = new System.Drawing.Size(190, 149);
+            this.pnlMesOperacion.TabIndex = 5;
+            // 
+            // lblMensajeOperacion
+            // 
+            this.lblMensajeOperacion.AutoSize = true;
+            this.lblMensajeOperacion.Location = new System.Drawing.Point(3, 29);
+            this.lblMensajeOperacion.Name = "lblMensajeOperacion";
+            this.lblMensajeOperacion.Size = new System.Drawing.Size(58, 20);
+            this.lblMensajeOperacion.TabIndex = 0;
+            this.lblMensajeOperacion.Text = "label14";
+            // 
             // dgvResultadoPersona
             // 
             this.dgvResultadoPersona.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -536,22 +556,9 @@
             this.lblNumeroFilas.Size = new System.Drawing.Size(0, 20);
             this.lblNumeroFilas.TabIndex = 21;
             // 
-            // pnlMesOperacion
+            // dataGridViewBindingSource
             // 
-            this.pnlMesOperacion.Controls.Add(this.lblMensajeOperacion);
-            this.pnlMesOperacion.Location = new System.Drawing.Point(8, 412);
-            this.pnlMesOperacion.Name = "pnlMesOperacion";
-            this.pnlMesOperacion.Size = new System.Drawing.Size(190, 149);
-            this.pnlMesOperacion.TabIndex = 5;
-            // 
-            // lblMensajeOperacion
-            // 
-            this.lblMensajeOperacion.AutoSize = true;
-            this.lblMensajeOperacion.Location = new System.Drawing.Point(3, 29);
-            this.lblMensajeOperacion.Name = "lblMensajeOperacion";
-            this.lblMensajeOperacion.Size = new System.Drawing.Size(58, 20);
-            this.lblMensajeOperacion.TabIndex = 0;
-            this.lblMensajeOperacion.Text = "label14";
+            this.dataGridViewBindingSource.DataSource = typeof(System.Windows.Forms.DataGridView);
             // 
             // frmPersonaPrincipal
             // 
@@ -590,11 +597,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleComDatoContacto)).EndInit();
             this.pnlBusqueda.ResumeLayout(false);
             this.pnlBusqueda.PerformLayout();
+            this.pnlMesOperacion.ResumeLayout(false);
+            this.pnlMesOperacion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultadoPersona)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatSexo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatEstadoCivil)).EndInit();
-            this.pnlMesOperacion.ResumeLayout(false);
-            this.pnlMesOperacion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -651,5 +659,6 @@
         private Label lblNombrePrincipal;
         private Panel pnlMesOperacion;
         private Label lblMensajeOperacion;
+        private BindingSource dataGridViewBindingSource;
     }
 }
