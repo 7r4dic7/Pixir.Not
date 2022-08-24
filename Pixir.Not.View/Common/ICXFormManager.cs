@@ -15,20 +15,16 @@ namespace Pixir.Not.View.Common
             get;
             set;
         }
-
-        
         EnumAccionForm AccionForm
         {
             get;
             set;
         }
-
         EnumStateForm StateForm
         {
             get;
             set;
         }
-
         T BaseEntity
         {
             get;
@@ -44,19 +40,12 @@ namespace Pixir.Not.View.Common
             get;
             set;
         }
-
          T show(Form _parent, DataContext _dc, EnumOperationType _tipoOperacion);
-
          T show(Form _parent, T _baseEntity, DataContext _dc, EnumOperationType _tipoOperacion);
-
          void loadInitialInformation(EnumOperationType _tipoOperacion);
-
          void setEntityForm(EnumOperationType _tipoOperacion);
-
          void getEntityForm();
-
          bool validateEntity();
-
          EnumAccionDialog AccionDialog
          {
              get;
