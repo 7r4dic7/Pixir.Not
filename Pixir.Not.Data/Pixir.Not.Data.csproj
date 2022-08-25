@@ -57,6 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DcGeneral.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Extended\Enum\EnumAccionDialog.cs" />
     <Compile Include="Extended\Enum\EnumAccionForm.cs" />
     <Compile Include="Extended\Enum\EnumFilterHead.cs" />
     <Compile Include="Extended\Enum\EnumLocation.cs" />
