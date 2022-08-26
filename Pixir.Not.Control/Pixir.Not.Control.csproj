@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="CtrlGeneric.cs" />
+    <Compile Include="Interface\Comun\Extended\Validate\ValidateComboBox.cs" />
+    <Compile Include="Interface\Comun\Extended\Validate\ValidateDate.cs" />
+    <Compile Include="Interface\Comun\Extended\Validate\ValidateTextBox.cs" />
     <Compile Include="Interface\Comun\IControlRegister.cs" />
     <Compile Include="Interface\Comun\IRegisterRules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,6 +56,10 @@
     <ProjectReference Include="..\Pixir.Not.Data.Generic\Pixir.Not.Data.Generic.csproj">
       <Project>{0440528f-f6d0-404b-b92d-63a0e237c9b4}</Project>
       <Name>Pixir.Not.Data.Generic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pixir.Not.Data\Pixir.Not.Data.csproj">
+      <Project>{4e0b0e2f-5e3e-46f8-8e61-d4825f2518c9}</Project>
+      <Name>Pixir.Not.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -24,30 +24,30 @@ namespace Pixir.Not.View.Extended
         /// <param name="_form">Formulario actual</param>
         /// <param name="_baseEntity">Entidad actual</param>
         /// <param name="_dataContext">Datacontext</param>  
-        public static void initializeComponent<T>(this ICXFormManager<T> _form, T _baseEntity, DataContext _dc, EnumOperationType _tipoOperacion, SegUsuario _segUsuario, PermisosPantallaManager _permisosPantallaManager)
+        public static void initializeComponent<T>(this ICXFormManager<T> _form, T _baseEntity, DataContext _dc, EnumOperationType _tipoOperacion)
         {
             _form.BaseEntity = _baseEntity;
             _form.DataContext = _dc;
-            _form.User = _segUsuario;
+            
 
             //si la accion es editar entra en este if y asigna accion y titulo de pantalla
             if (_form.BaseEntity != null)
             {
                 _form.AccionForm = EnumAccionForm.Edit;
-                _form.Titulo = Not.Control.Comun.Properties.Resources.TIT_MODULO_EDITAR;
+                //_form.Titulo = Not.Control.Comun.Properties.Resources.TIT_MODULO_EDITAR;
 
             }
             //si la accion es nueva entra en este if y asigna accion y titulo de pantalla
             else
             {
                 _form.AccionForm = EnumAccionForm.New;
-                _form.Titulo = Not.Control.Comun.Properties.Resources.TIT_MODULO_NUEVO;
+               // _form.Titulo = Not.Control.Comun.Properties.Resources.TIT_MODULO_NUEVO;
 
             }
 
             _form.loadInitialInformation(_tipoOperacion); //Carga la informacion personalizada de la pantalla
             _form.setEntityForm(_tipoOperacion); //Se carga en pantalla y se sincronizan controles
-            _form.setProfilePermissions(_permisosPantallaManager);//estab;ece los permisos por pantalla manager
+            //_form.setProfilePermissions(_permisosPantallaManager);//estab;ece los permisos por pantalla manager
 
             _form.StateForm = EnumStateForm.WithOutChanges;
         }

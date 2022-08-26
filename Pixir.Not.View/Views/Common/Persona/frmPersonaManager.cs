@@ -53,12 +53,12 @@ namespace Pixir.Not.View.Views.Common.Persona
         /// <summary>
         /// Variable de CatalogExceptionManager.
         /// </summary>
-        private CatalogExceptionManager catalogExceptionManager = new CatalogExceptionManager();
+        //private CatalogExceptionManager catalogExceptionManager = new CatalogExceptionManager();
 
         /// <summary>
         /// Variable de tipo ConexionExceptionManager.
         /// </summary>
-        private ConexionExceptionManager conexionExceptionManager = new ConexionExceptionManager();
+        //private ConexionExceptionManager conexionExceptionManager = new ConexionExceptionManager();
 
         #endregion
         #region Constructor
@@ -96,12 +96,7 @@ namespace Pixir.Not.View.Views.Common.Persona
             }
             catch (Exception _e)
             {
-                //Si un catalogo esta vacio.
-                if (catalogExceptionManager.CatalogException) { return null; }
-                //Si no se puede conectar con el servidor de base de datos.
-                if (conexionExceptionManager.ConexionException) { return null; }
                 MessageBox.Show(_e.Message);
-
             }
             return this.BaseEntity;
 
@@ -802,7 +797,7 @@ namespace Pixir.Not.View.Views.Common.Persona
 
         }
 
-        private void txtChanged(object sender, EventArgs e)Aqiiiiii!!!
+        private void txtChanged(object sender, EventArgs e)
         {
             if (this.validateStateFormControl == true)
             {
@@ -868,6 +863,151 @@ namespace Pixir.Not.View.Views.Common.Persona
                     this.formClosing(e);
                 }
 
+            }
+        }
+        #endregion
+
+        #region Eventos Dato Contacto
+
+        private void btnAgregarDatoContacto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmDatoContactoManager view = new frmDatoContactoManager();
+                ComDatoContacto entity = view.show(this, this.DataContext, Not.Data.Extended.Enum.EnumOperationType.Agregar, this.User, null);
+                if (entity != null)
+                {
+                    //verifica la conexion con la bd
+                    if (conexionExceptionManager.stateConexion(this.dataContext, this))
+                    {
+                        this.validateStateFormDataGrid = true;
+                        this.BaseEntity.ComDatoContacto.Add(entity);
+                        ((BindingSource)this.dgvComDatoContacto.DataSource).Add(entity);
+                        this.dgvComDatoContacto.Refresh();
+                    }
+
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void btnEditarDatoContacto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (this.dgvComDatoContacto.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_SELECCIONAR_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                }
+                else
+                {
+                    //verifica la conexion con la bd
+                    if (conexionExceptionManager.stateConexion(this.dataContext, this))
+                    {
+                        frmDatoContactoManager view = new frmDatoContactoManager();
+                        ComDatoContacto entity = (ComDatoContacto)this.dgvComDatoContacto.SelectedRows[0].DataBoundItem;
+                        view.show(this, entity, this.DataContext, Not.Data.Extended.Enum.EnumOperationType.Editar, this.User, null);
+                        if (view.StateEdit) { this.StateForm = EnumStateForm.WithChanges; }
+                        this.dgvComDatoContacto.Refresh();
+
+                    }
+
+
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+
+        }
+
+        private void btnEliminarDatoContacto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvComDatoContacto.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_SELECCIONAR_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show(Not.Control.Comun.Properties.Resources.PRE_ELIMINAR_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        //verifica la conexion con la bd
+                        if (!conexionExceptionManager.stateConexion(this.dataContext, this)) { return; }
+                        BindingSource binding = (BindingSource)dgvComDatoContacto.DataSource;
+
+                        ComDatoContacto entity = (ComDatoContacto)this.dgvComDatoContacto.SelectedRows[0].DataBoundItem;
+                        if (entity.id > (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                        {
+                            this.DataContext.GetTable<ComDatoContacto>().DeleteOnSubmit(entity);
+                            this.validateStateFormDataGrid = true;
+                            binding.Remove(entity);
+                        }
+                        else
+                        {
+                            if (this.BaseEntity.ComDatoContacto.Remove(entity))
+                            {
+                                this.validateStateFormDataGrid = true;
+                                ((BindingSource)this.dgvComDatoContacto.DataSource).Remove(entity);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+        #endregion
+
+        #region Eventos DataGridView
+
+        private void cellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                DataGridView dg = (DataGridView)sender;
+                dg.Rows[e.RowIndex].Selected = true;
+            }
+
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+
+        }
+
+        private void rowAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+
+            if (this.validateStateFormDataGrid == true)
+            {
+                this.StateForm = EnumStateForm.WithChanges;
+                this.stateEdit = true;
+            }
+
+        }
+
+        private void rowRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+
+            if (this.validateStateFormDataGrid == true)
+            {
+                this.StateForm = EnumStateForm.WithChanges;
+                this.stateEdit = true;
             }
 
         }
