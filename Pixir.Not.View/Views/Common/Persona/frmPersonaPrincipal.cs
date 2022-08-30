@@ -591,7 +591,7 @@ namespace Pixir.Not.View.Views.Common.Persona
                 frmPersonaManager view = new frmPersonaManager();
                 DataContext dataContextTemp = new DcGeneralDataContext();
 
-                Not.Data.Entity.ComPersona entity = view.show(this, dataContextTemp, Not.Data.Extended.Enum.EnumOperationType.Agregar, this.segUsuario, null);
+                ComPersona entity = view.show(this, dataContextTemp, EnumOperationType.Agregar);
 
                 if (entity != null)
                 {
@@ -635,7 +635,7 @@ namespace Pixir.Not.View.Views.Common.Persona
                         Expression<Func<ComPersona, bool>> predicate = c => c.id == persona.id;
                         ComPersona person = CtrlGeneric.getItemByExpression<ComPersona>(dataContextTemp, predicate);
 
-                        if (view.show(this, person, dataContextTemp, Not.Data.Extended.Enum.EnumOperationType.Editar, null) != null)
+                        if (view.show(this, person, dataContextTemp, EnumOperationType.Editar) != null)
                         {
                             dataContextTemp.SubmitChanges();
                             //this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_EDITAR);
