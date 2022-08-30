@@ -1380,8 +1380,8 @@ namespace Pixir.Not.View.Views.Common.Persona
                 {
                     if (this.txtCurp.Text.getCurpRegularExpression())
                     {
-                        MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_CURP_INCORRECTA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
+                        //MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_CURP_INCORRECTA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        //    MessageBoxIcon.Error);
                         this.txtCurp.Focus();
                         return false;
                     }

@@ -15,6 +15,8 @@ using Pixir.Not.Data.Entity;
 using System.Linq.Expressions;
 using Pixir.Not.View.Properties;
 using Pixir.Not.Control;
+using Pixir.Not.Data.Extended.Enum;
+using Pixir.Not.View.Extended.View;
 
 #endregion
 namespace Pixir.Not.View.Views.Common.Persona
@@ -133,6 +135,7 @@ namespace Pixir.Not.View.Views.Common.Persona
         public frmPersonaPrincipal()
         {
             InitializeComponent();
+            this.loadInitialInformation();
         }
         #endregion
 
@@ -243,8 +246,8 @@ namespace Pixir.Not.View.Views.Common.Persona
                 }
                 list.Insert(0, new CatalogExchange()
                 {
-                    id = (int)Data.Extended.Enum.EnumNumericValue.MenosUno,
-                    strValor = Data.Extended.Enum.EnumFilterHead.TODOS.ToString()
+                    id = (int)EnumNumericValue.MenosUno,
+                    strValor = EnumFilterHead.TODOS.ToString()
                 });
                 dgvFiltroComCatEstadoCivil.DataSource = list;
                 dgvFiltroComCatEstadoCivil.Rows[0].Selected = true;
@@ -271,6 +274,18 @@ namespace Pixir.Not.View.Views.Common.Persona
                 });
                 dgvFiltroComCatSexo.DataSource = list;
                 dgvFiltroComCatSexo.Rows[0].Selected = true;
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void setFiltroComCatEstadoRegistro()
+        {
+            try
+            {
+                this.estadoRegistroCriteria.id = (int)Data.Generic.EnumRegisterState.Activo;
             }
             catch (Exception _e)
             {
@@ -549,7 +564,7 @@ namespace Pixir.Not.View.Views.Common.Persona
         }
         #endregion
 
-        #region frmClientePersonaPrincipal
+        #region eventos frmClientePersonaPrincipal
         private void txtCriteria_TextChanged(object sender, EventArgs e)
         {
             try
@@ -990,18 +1005,104 @@ namespace Pixir.Not.View.Views.Common.Persona
         }
         #endregion
 
-        #region setPermiso
-        private void setPermisosPantalla()
+        #region  Pantalla Emergente Persona
+
+        public ComPersona Show(Form _padre)
         {
-            //this.btnAgregar.Visible = this.permisosPantalla.Agregar;
-            //this.btnEditar.Visible = this.permisosPantalla.Editar;
-            //this.btnEliminar.Visible = this.permisosPantalla.Eliminar;
-            //this.btnImprimir.Visible = this.permisosPantalla.Imprimir;
-            //this.btnSms.Visible = this.permisosPantalla.Sms;
-            //this.btnCorreoElectronico.Visible = this.permisosPantalla.Mail;
+            try
+            {
+                this.cargaControlesBase();
+                if (_padre != null)
+                {
+
+                    this.AutoSize = true;
+                    this.StartPosition = FormStartPosition.CenterParent;
+                    this.WindowState = FormWindowState.Normal;
+                    this.Size = new System.Drawing.Size((int)Not.Data.Extended.Enum.EnumScreenSize.SizeXVentanaAsignar,
+                        (int)Not.Data.Extended.Enum.EnumScreenSize.SizeYVentanaAsignar);
+                    if (this.Size.Height < 1600)
+                    {
+                        this.Size = new System.Drawing.Size((int)Not.Data.Extended.Enum.EnumScreenSize.SizeXVentanaAsignar,
+                        (int)Not.Data.Extended.Enum.EnumScreenSize.SizeYVentanaAsignar);
+                    }
+                    this.ShowDialog();
+                }
+                else
+                {
+                    this.Show();
+                }
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+
+            if (this.asingData || this.closeWindow || this.buttonExit)
+            {
+                return null;
+            }
+            else
+            {
+                return this.baseEntity;
+            }
 
         }
 
+
+
+        /// <summary>
+        /// Evento que nos indica si cerro la ventana, con el boton X
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">FormClosedEventArgs</param>
+        private void frmPersonaPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                if (this.buttonSelect == true)
+                {
+                    this.closeWindow = false;
+                }
+                else
+                {
+                    this.closeWindow = true;
+                }
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Metodo que carga controles necesarios para el funcionamiento de la pantalla emeregente de
+        /// asignacion de nuevos datos a otros modulos
+        /// </summary>
+        private void cargaControlesBase()
+        {
+
+            this.btnSeleccionar.Visible = true;
+            this.btnSalir.Visible = true;
+        }
+
+        #endregion 
+
+        #region SetPermiso
+
+        private void setPermisosPantalla()
+        {
+        //    this.btnAgregar.Visible = this.permisosPantalla.Agregar;
+        //    this.btnEditar.Visible = this.permisosPantalla.Editar;
+        //    this.btnEliminar.Visible = this.permisosPantalla.Eliminar;
+        //    this.btnImprimir.Visible = this.permisosPantalla.Imprimir;
+        //    this.btnSms.Visible = this.permisosPantalla.Sms;
+        //    this.btnCorreoElectronico.Visible = this.permisosPantalla.Mail;
+
+        }
         #endregion
+
     }
 }
