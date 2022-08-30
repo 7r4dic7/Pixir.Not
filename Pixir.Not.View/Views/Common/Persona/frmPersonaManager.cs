@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.Linq;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -1011,6 +1012,392 @@ namespace Pixir.Not.View.Views.Common.Persona
             }
 
         }
+        #endregion
+
+        #region Metodos Validacion
+
+
+        /// <summary>
+        /// Metodo que valida que los datos, y a permite o no la ejecucion de saveEntity,
+        /// </summary>
+        /// <returns></returns>
+        private bool validaEntidad()
+        {
+            try
+            {
+
+                //Verifica si la entidad esta vacia
+                if (this.BaseEntity == null)
+                {
+                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_ENTIDAD_VACIA, Not.Control.Comun.Properties.Resources.TIT_SISTEMA,
+                      MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+                //valida los datos requeridos
+                if (!this.validateNull())
+                {
+                    return false;
+                }
+
+
+                //valida los datos  mediante expresion regular
+                if (!this.validateRegularExpresison())
+                {
+                    return false;
+                }
+                //Valida si existe una empresa duplicada
+                if (this.tipoOperacion == Not.Data.Extended.Enum.EnumOperationType.Agregar)
+                {
+                    if (!this.validaPersonaDuplicadaInsert())
+                    {
+                        return false;
+                    }
+                }
+
+                //Valida si existe una empresa duplicada
+                if (this.tipoOperacion == Not.Data.Extended.Enum.EnumOperationType.Editar)
+                {
+                    if (!this.validaPersonaDuplicadaEdit())
+                    {
+                        return false;
+                    }
+                }
+
+
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show(_ex.Message);
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Metodo que valida si la empresa ya fue creada, al agregar
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool validaPersonaDuplicadaInsert()
+        {
+
+            try
+            {
+                CtrlPersona ctrlPersona = new CtrlPersona();
+                Expression<Func<ComPersona, bool>> predicateExisteCurp = c => c.strCURP.Equals(this.txtCurp.Text.Trim());
+
+                Expression<Func<ComPersona, bool>> predicate = this.obtenerExpresionPersonaDuplicada(this.baseEntity);
+                List<ComPersona> lista = ctrlPersona.getListItemByExpression(this.dataContext, predicate);
+                DialogResult dialogResult = DialogResult.Yes;
+
+                int existCURP = Not.Control.CtrlGeneric.getListByExpression<ComPersona>(this.DataContext, predicateExisteCurp).ToList().Count;
+                int existPersona = lista.Count;
+
+                if (existCURP > (int)Not.Data.Extended.Enum.EnumNumericValue.Cero && !this.txtCurp.Text.Trim().Equals(String.Empty))
+                {
+                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_CURP_DUPLICADA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    this.txtCurp.Focus();
+                    return false;
+                }
+                if (existPersona > (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    for (int i = 0; i < lista.Count; i++)
+                    {
+                        //persona igual, y curp son vacia
+                        if (lista[i].strCURP.Trim().Equals(String.Empty) && this.txtCurp.Text.Trim().Equals(String.Empty))
+                        {
+
+                            MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_PERSONA_DUPLICADA_CURPS_VACIOS, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                            this.txtCurp.Focus();
+                            return false;
+                        }
+                        //CUANDO AMBAS CURPS SON LLEnAS 
+                        if (!lista[i].strCURP.Trim().Equals(String.Empty) && !this.txtCurp.Text.Trim().Equals(String.Empty) && lista[i].strCURP.Trim().Equals(this.txtCurp.Text.Trim()))
+                        {
+
+                            MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_PERSONA_DUPLICADA_CURPS_LLENOS, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                            this.txtCurp.Focus();
+                            return false;
+                        }
+
+                        //el nuevo registro cuenta con CURP el de la bd no
+                        if (lista[i].strCURP.Trim().Equals(String.Empty) && !this.txtCurp.Text.Trim().Equals(String.Empty))
+                        {
+                            dialogResult = MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_PERSONA_DUPLICADA_CURP_NUEVA_LLENA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR,
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                            if (dialogResult == DialogResult.Yes)
+                            {
+                                return true;
+                            }
+
+                            this.txtCurp.Focus();
+                            return false;
+                        }
+
+                        // si la curp en bd esta llena y en el nuevo registro esta vacia 
+                        if (!lista[i].strCURP.Trim().Equals(String.Empty) && this.txtCurp.Text.Trim().Equals(String.Empty))
+                        {
+                            dialogResult = MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_PERSONA_DUPLICADA_CURP_ENBD_LLENA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR,
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                            if (dialogResult == DialogResult.Yes)
+                            {
+                                return true;
+                            }
+
+                            this.txtCurp.Focus();
+                            return false;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+                return false;
+            }
+
+            return true;
+
+        }
+
+        /// <summary>
+        /// Metodo que valida si la empresa ya fue creada, al editar
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool validaPersonaDuplicadaEdit()
+        {
+            try
+            {
+                if (this.StateForm == EnumStateForm.WithChanges)
+                {
+                    CtrlPersona ctrlPersona = new CtrlPersona();
+                    Expression<Func<ComPersona, bool>> predicate = this.obtenerExpresionPersonaDuplicada(this.baseEntity);
+                    Expression<Func<ComPersona, bool>> predicateExisteCurp = c => c.strCURP.Equals(this.txtCurp.Text.Trim());
+
+                    List<ComPersona> lista = ctrlPersona.getListItemByExpression(this.dataContext, predicate);
+                    DialogResult dialogResult = DialogResult.Yes;
+
+                    if (this.baseEntity.strCURP.Equals(String.Empty) && !this.txtCurp.Text.Trim().Equals(String.Empty))
+                    {
+                        int exist = Not.Control.CtrlGeneric.getListByExpression<ComPersona>(this.DataContext, predicateExisteCurp).ToList().Count;
+                        if (exist > (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                        {
+                            MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_CURP_DUPLICADA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                            this.txtCurp.Focus();
+                            return false;
+                        }
+                    }
+                    if (lista.Count >= (int)Not.Data.Extended.Enum.EnumNumericValue.Uno)
+                    {
+                        for (int i = 0; i < lista.Count; i++)
+                        {
+                            if (lista[i].id != this.BaseEntity.id)
+                            {
+                                //persona igual, y curp son vacia 
+                                if (lista[i].strCURP.Trim().Equals(String.Empty) && this.txtCurp.Text.Trim().Equals(String.Empty))
+                                {
+
+                                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_PERSONA_DUPLICADA_CURPS_VACIOS, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+                                    this.txtCurp.Focus();
+                                    return false;
+                                }
+
+                                //CUANDO AMBAS CURPS SON LLEnAS 
+                                if (!lista[i].strCURP.Trim().Equals(String.Empty) && !this.txtCurp.Text.Trim().Equals(String.Empty) && lista[i].strCURP.Trim().Equals(this.txtCurp.Text.Trim()))
+                                {
+
+                                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_PERSONA_DUPLICADA_CURPS_LLENOS, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+                                    this.txtCurp.Focus();
+                                    return false;
+                                }
+
+                                //el nuevo registro cuenta con CURP el de la bd no
+                                if (lista[i].strCURP.Trim().Equals(String.Empty) && !this.txtCurp.Text.Trim().Equals(String.Empty))
+                                {
+                                    dialogResult = MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_PERSONA_DUPLICADA_CURP_NUEVA_LLENA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR,
+                                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                                    if (dialogResult == DialogResult.Yes)
+                                    {
+                                        return true;
+                                    }
+
+                                    this.txtCurp.Focus();
+                                    return false;
+                                }
+
+                                // si la curp en bd esta llena y en el nuevo registro esta vacia 
+                                if (!lista[i].strCURP.Trim().Equals(String.Empty) && this.txtCurp.Text.Trim().Equals(String.Empty))
+                                {
+                                    dialogResult = MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_PERSONA_DUPLICADA_CURP_ENBD_LLENA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR,
+                                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                                    if (dialogResult == DialogResult.Yes)
+                                    {
+                                        return true;
+                                    }
+
+                                    this.txtCurp.Focus();
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+                return false;
+            }
+
+            return true;
+
+        }
+
+        /// <summary>
+        /// Expresion que valida que la empresa no este duplicada en la BD
+        /// </summary>
+        /// <param name="_comPersona">ComPersona</param>
+        /// <returns>Expression</returns>
+        private Expression<Func<ComPersona, bool>> obtenerExpresionPersonaDuplicada(ComPersona _comPersona)
+        {
+            try
+            {
+                string strNombre = _comPersona.strNombre.Trim();
+                string strAPaterno = _comPersona.strAPaterno.Trim();
+                string strAMaterno = _comPersona.strAMaterno.Trim();
+                int idSexo = _comPersona.idComCatSexo;
+                DateTime? fechaNacimiento = _comPersona.dteFechaNacimiento.Value;
+
+                Expression<Func<ComPersona, bool>> predicate = persona => (
+                    persona.strNombre.Trim().Equals(strNombre) &&
+                    persona.strAPaterno.Trim().Equals(strAPaterno) &&
+                    persona.strAMaterno.Trim().Equals(strAMaterno) &&
+                    persona.dteFechaNacimiento.Equals(fechaNacimiento) &&
+                    persona.idComCatSexo == idSexo);
+                return predicate;
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// metodo que valida que los datos necesarios requeridos en pantalla hallan sido capturados
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool validateNull()
+        {
+            try
+            {
+                if (this.txtNombre.Text.getTextFieldNull())
+                {
+                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_NOMBRE_VACIO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    this.txtNombre.Focus();
+                    return false;
+                }
+                if (this.txtApellidoPaterno.Text.getTextFieldNull())
+                {
+                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_APELLIDO_PATERNO_VACIO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    this.txtApellidoPaterno.Focus();
+                    return false;
+                }
+                if (!this.dteFechaNacimiento.getBirthDateMinimun(this))
+                {
+                    this.dteFechaNacimiento.Focus();
+                    return false;
+                }
+                if (!this.cmbComCatSexo.getComboBoxNull())
+                {
+                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_COMBOBOX_SEXO_SIN_SELECCIONAR, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    this.cmbComCatSexo.Focus();
+                    return false;
+                }
+
+                if (!this.cmbComCatEstadoCivil.getComboBoxNull())
+                {
+                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_COMBOBOX_ESTADO_CIVIL_SIN_SELECCIONAR, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.cmbComCatEstadoCivil.Focus();
+                    return false;
+                }
+                if (!this.cmbComCatOcupacion.getComboBoxNull())
+                {
+                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_COMBOBOX_OCUPACION_SIN_SELECCIONAR, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.cmbComCatOcupacion.Focus();
+                    return false;
+                }
+                if (this.txtOriginario.Text.getTextFieldNull())
+                {
+                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_ORIGINARIO_VACIO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    this.txtOriginario.Focus();
+                    return false;
+                }
+
+                if (!this.cmbComCatNacionalidad.getComboBoxNull())
+                {
+                    MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_COMBOBOX_NACIONALIDAD_SIN_SELECCIONAR, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.cmbComCatEstadoCivil.Focus();
+                    return false;
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Valida que los datos de los tipo texto sean correctos, mediante expresion regular
+        /// </summary>
+        /// <returns></returns>
+        private bool validateRegularExpresison()
+        {
+            try
+            {
+                // si la curpe es diferente de vacia valida
+                if (!this.txtCurp.Text.getTextFieldNull())
+                {
+                    if (this.txtCurp.Text.getCurpRegularExpression())
+                    {
+                        MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_CURP_INCORRECTA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        this.txtCurp.Focus();
+                        return false;
+                    }
+
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+                return false;
+            }
+            return true;
+
+        }
+
+
         #endregion
 
     }
