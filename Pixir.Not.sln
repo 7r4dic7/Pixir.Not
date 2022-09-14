@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pixir.Not.View", "Pixir.Not.View\Pixir.Not.View.csproj", "{934FCBAB-E753-40E4-9306-B200BBC39F41}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixir.Not.Data", "Pixir.Not.Data\Pixir.Not.Data.csproj", "{4E0B0E2F-5E3E-46F8-8E61-D4825F2518C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixir.Not.Data.Generic", "Pixir.Not.Data.Generic\Pixir.Not.Data.Generic.csproj", "{0440528F-F6D0-404B-B92D-63A0E237C9B4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixir.Not.Control", "Pixir.Not.Control\Pixir.Not.Control.csproj", "{E66E8D6D-F236-4994-8851-2F72F1141B58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixir.Not.View2", "Pixir.Not.View2\Pixir.Not.View2.csproj", "{EAC31108-A3DD-4625-8790-BD34829005E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{934FCBAB-E753-40E4-9306-B200BBC39F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{934FCBAB-E753-40E4-9306-B200BBC39F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{934FCBAB-E753-40E4-9306-B200BBC39F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{934FCBAB-E753-40E4-9306-B200BBC39F41}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4E0B0E2F-5E3E-46F8-8E61-D4825F2518C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4E0B0E2F-5E3E-46F8-8E61-D4825F2518C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E0B0E2F-5E3E-46F8-8E61-D4825F2518C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{E66E8D6D-F236-4994-8851-2F72F1141B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E66E8D6D-F236-4994-8851-2F72F1141B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E66E8D6D-F236-4994-8851-2F72F1141B58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAC31108-A3DD-4625-8790-BD34829005E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAC31108-A3DD-4625-8790-BD34829005E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAC31108-A3DD-4625-8790-BD34829005E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAC31108-A3DD-4625-8790-BD34829005E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

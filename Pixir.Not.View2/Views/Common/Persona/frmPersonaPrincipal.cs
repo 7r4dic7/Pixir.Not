@@ -1,137 +1,172 @@
 ﻿#region Using
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Linq;
 using Pixir.Not.Control.Interface.Comun;
-using Pixir.Not.View.Extended.Disconnect.Catalog;
 using Pixir.Not.Data.Entity;
 using System.Linq.Expressions;
-using Pixir.Not.View.Properties;
-using Pixir.Not.Control;
-using Pixir.Not.Data.Extended.Enum;
 using Pixir.Not.View.Extended.View;
+using Pixir.Not.View.Extended.Disconnect.Catalog;
 
 #endregion
-namespace Pixir.Not.View.Views.Common.Persona
+namespace Not.View.Views.Common.Persona
 {
     /// <summary>
     /// 
     /// </summary>
-    public partial class frmPersonaPrincipal : Form, IControlRegister<ComPersona>
+    public partial class frmPersonaPrincipal : Form, IControlRegister<Pixir.Not.Data.Entity.ComPersona>
     {
+
         #region Variables
+
         /// <summary>
-        /// Variable que representa el punto de entrada de linq
+        /// Variable que representa el punto de entrada de linq.
         /// </summary>
         private DataContext dataContext;
+
         /// <summary>
-        /// Variable del tipo CatalogExchange
+        /// Variable de tipo CatalogExchange. 
         /// </summary>
         private CatalogExchange estadoCivilCriteria;
+
         /// <summary>
-        /// Variable del tipo CatalogExchange
+        /// Variable de tipo CatalogExchange. 
         /// </summary>
         private CatalogExchange sexoCriteria;
+
         /// <summary>
-        /// Variable del tipo String almacena la cadena de busqueda.
+        /// Vriable de tipo String. almacena la cadena de busqueda.
         /// </summary>
         private String textoCriteria;
+
         /// <summary>
-        /// Variable del tipo ComPersona. Hace referencia a la entidad base o principal del modulo
+        /// Variable de tipo ComPersona.  Hace referencia a la entidad base o principal del modulo.
         /// </summary>
-        private Data.Entity.ComPersona baseEntity;
+        private Pixir.Not.Data.Entity.ComPersona baseEntity;
+
         /// <summary>
-        /// Variable del tipo System.Windows.Forms.Timer
+        /// Variable de tipo System.Windows.Forms.Timer.
         /// </summary>
         System.Windows.Forms.Timer clock = new System.Windows.Forms.Timer();
 
+
         /// <summary>
-        /// Variable  de tipo PermisosPantalla. Contioene la logica de los permisos.
+        /// Variable  de tipo PermisosPantalla. Contiene la logica de los permisos.
         /// </summary>
         //private PermisosPantalla permisosPantalla = null;
 
         /// <summary>
-        /// Variable que contiene todas las instancias de la interface que se implementan
+        /// variable que contiene todas las instancia de la interface que se implementan
         /// </summary>
-        private List<IRegisterRules> reglasSeleccion = new List<IRegisterRules> ();
+        private List<IRegisterRules> reglasSeleccion = new List<IRegisterRules>();
         /// <summary>
         /// Variable que indica si ya fue asignados los datos a otro modulo
         /// </summary>
-        private bool asingData = false;
+        private bool asignData = false;
+
         /// <summary>
-        /// Variable que inicializa el estado del registro como activo
+        /// Variable que inicializa el estado registro, como activo
         /// </summary>
-        private Data.Entity.ComCatEstadoRegistro estadoRegistroCriteria = new Data.Entity.ComCatEstadoRegistro();
+        private Pixir.Not.Data.Entity.ComCatEstadoRegistro estadoRegistroCriteria = new Pixir.Not.Data.Entity.ComCatEstadoRegistro();
+
         /// <summary>
-        /// Variable que indica si se cerro la ventana al pulssar el boton X
+        /// Variable que indica si ce cerro la ventana, al pulsal el boton X
         /// </summary>
         private bool closeWindow = false;
+
         /// <summary>
-        /// Variable que indica que se ha seleccionado el filtro sexo, la seleccion es diferente de todos
+        /// Variabale que indica que se ha seleccionado el filtro sexo, la seleccion es diferente de todos
         /// </summary>
         private bool inSexo = false;
+
         /// <summary>
-        /// Variable que indica que se ha seleccionado el filtro estado civil, la seleccion es diferente de todos
+        /// Variable que indica que se ha seleccionado el  filtro estado civil, la seleccion es diferente de todos
         /// </summary>
         private bool inEstadoCivil = false;
+
         /// <summary>
         /// Variable que indica si la consulta en el setResultadoEmpleado
-        /// se ejecutara en la forma abierta o en lla cerrada, donde abierta es igual a entrar al databinding normal o
-        /// cerrrada donde entra a databinding source especifico, dependiendo de las combinaciones. cuando es true no entra
-        /// si trae datos tipo texto en la consulta
+        /// se ejecutara en la forma abierta o en la cerrada, donde abierta es igual a entrar al databinding normal o 
+        /// cerrada donde entra a datbinding source especifico, dependiendo de las combinaciones. cuando es true no entra 
+        /// si trae datso tipo texto en la consulta
         /// </summary>
         private bool inSetResultado = false;
+
         /// <summary>
-        /// Variable que lleva el conteo de cuantas ocacaiones se accede
+        /// Variable que lleva el conteo de cuantas ocaciones se accede
         /// a setResultadoPersona al cargar la pantalla
         /// </summary>
-        private int countSetResultadoGlobal = (int)Data.Extended.Enum.EnumNumericValue.Cero;
+        private int countSetResultadoGlobal = (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero;
+
         /// <summary>
-        /// variable que verifica si se ha dado click al boton seleccionar
+        /// variable que verifica si se ha dado clic al boton seleccionar
         /// </summary>
         private bool buttonSelect = false;
+
         /// <summary>
-        /// Variable que indica si se ha pulsado el bototn salir
+        /// variable que indica si se ha pilsado el boton salir
         /// </summary>
         private bool buttonExit = false;
+
         /// <summary>
         /// DataContext que permite realizar la eliminacion
         /// </summary>
         private DataContext dataContextDelete;
+
         /// <summary>
-        /// Variable que contiene el mensaje para la excepcion del filtro
+        /// variable que contiene el mensaje para la excepcion del filtro.
         /// </summary>
         private String messageFilterException = String.Empty;
+
         /// <summary>
-        /// Objeto que establece la instancia de la clase que contiene la sentencia precompilada para principal
+        /// Variable de tipo filterExceptionPrincipal.
         /// </summary>
-        View.Common.Compiled<Data.Entity.ComPersona> queryCompiled = new View.Common.Compiled<Data.Entity.ComPersona> ();
+        //private FilterExceptionPrincipal filterExceptionPrincipal = new FilterExceptionPrincipal();
+
+        /// <summary>
+        /// Variable de tipo conexionExceptionPrincipal.
+        /// </summary>
+        //private ConexionExceptionPrincipal conexionExceptionPrincipal = new ConexionExceptionPrincipal();
+
+        /// <summary>
+        /// Variable que almacena el usuario 
+        /// </summary>
+        //private SegUsuario segUsuario;
+
+        /// <summary>
+        /// Objeto que establece la instancia de la clase que contiene la sentncia precompilda para principal.
+        /// </summary>
+        Pixir.Not.View.Common.Compiled<Pixir.Not.Data.Entity.ComPersona> queryCompiled = new Pixir.Not.View.Common.Compiled<ComPersona>();
         #endregion
 
         #region Propiedades
+
+
         public DataContext DataContext
         {
             get { return dataContext; }
             set { dataContext = value; }
         }
+
         /// <summary>
-        /// Propiedad que obtiene la referencia de todas las implementaciones de esta interface
-        /// </summary>
+        /// Propiedad que obtiene la refencia de todas las implementaciones de esta interface
+        /// </summary>     
         public List<IRegisterRules> ReglasSeleccion
         {
             get { return reglasSeleccion; }
             set { reglasSeleccion = value; }
         }
+
+
         #endregion
 
         #region Constructor
+
+
         public frmPersonaPrincipal()
         {
             InitializeComponent();
@@ -140,6 +175,7 @@ namespace Pixir.Not.View.Views.Common.Persona
         #endregion
 
         #region Metodo loadInitialInformation
+
         private void loadInitialInformation()
         {
             try
@@ -149,30 +185,36 @@ namespace Pixir.Not.View.Views.Common.Persona
                 this.setFiltroComCatSexo();
                 this.setResultadoComPersona();
                 this.hidePanelMessage();
+                //this.permisosPantalla = _permisosPantalla;
                 this.setStatus();
                 this.setTabIndex();
             }
-            catch(Exception ex)
+            catch (Exception _e)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(_e.Message);
             }
+
         }
+
         #endregion
 
         #region Metodo setStatus
+
         private void setStatus()
         {
-            this.lblDetalle.Location = new Point((int)Data.Extended.Enum.EnumLocation.PositionNumberFile_X,
-                (int)Data.Extended.Enum.EnumLocation.PositionNumberFile_Y);
+            this.lblNumeroFilas.Location = new Point((int)Pixir.Not.Data.Extended.Enum.EnumLocation.PositionNumberFile_X,
+                (int)Pixir.Not.Data.Extended.Enum.EnumLocation.PositionNumberFile_Y);
             this.btnSeleccionar.Visible = false;
             this.btnSalir.Visible = false;
-
+            //this.setPermisosPantalla();
         }
+
         #endregion
 
-        #region Metodo setTabIndex
+        #region  Metodo setTabIndex
+
         /// <summary>
-        /// Metodo que establece el tabindex de los controles, en forma manual
+        /// metodo que establece el Tabindex de los controles, en forma manual.
         /// </summary>
         private void setTabIndex()
         {
@@ -185,30 +227,42 @@ namespace Pixir.Not.View.Views.Common.Persona
             this.btnSeleccionar.TabIndex = 6;
             this.btnEditar.TabIndex = 7;
             this.btnEliminar.TabIndex = 8;
+
             //Filtros
             this.dgvFiltroComCatSexo.TabIndex = 9;
             this.dgvFiltroComCatEstadoCivil.TabIndex = 10;
-            //Resultado
+            //resultado
             this.dgvResultadoPersona.TabIndex = 11;
+
             //Detalle
             this.pnlPrincipalDetalle.TabIndex = 12;
             this.btnImprimir.TabIndex = 13;
             //Detalle datagridview
             this.dgvDetalleComDatoContacto.TabIndex = 14;
+
             //Botones inferiores
             this.btnSms.TabIndex = 15;
             this.btnCorreoElectronico.TabIndex = 16;
+
+
+
         }
+
+
         #endregion
 
         #region Metodo setDataContextRefresh
+
+        /// <summary>
+        /// Metodo que refresca el data context. la baseEntity y los datos que se muestran el data grids
+        /// </summary>
         private void setDataContextRefresh()
         {
             try
             {
-                if(this.dgvResultadoPersona.RowCount > (int)Data.Extended.Enum.EnumNumericValue.Cero)
+                if (this.dgvResultadoPersona.RowCount > (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                 {
-                    this.dataContext.Refresh(RefreshMode.OverwriteCurrentValues,this.baseEntity);
+                    this.dataContext.Refresh(RefreshMode.OverwriteCurrentValues, this.baseEntity);
                     for (int i = 0; i < this.baseEntity.ComDatoContacto.Count; i++)
                     {
                         ComDatoContacto comDatoContacto = new ComDatoContacto();
@@ -230,47 +284,53 @@ namespace Pixir.Not.View.Views.Common.Persona
             {
                 MessageBox.Show(_e.Message);
             }
+
         }
         #endregion
 
         #region Metodos setFiltro
+
+
         private void setFiltroComCatEstadoCivil()
         {
             try
             {
                 List<CatalogExchange> list = CtrlCatalogFilter.getCatalog<ComCatEstadoCivil>(this.DataContext).ToList();
-                if(list.Count == (int)Data.Extended.Enum.EnumNumericValue.Cero)
+                if (list.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                 {
-                    //this.messageFilterException = "Resources.MES_COM_CAT_ESTADO_CIVIL_VACIO;
+                    //this.messageFilterException = Resources.MES_COM_CAT_ESTADO_CIVIL_VACIO;
                     //filterExceptionPrincipal.throwExceptionInFilter();
                 }
+
                 list.Insert(0, new CatalogExchange()
                 {
-                    id = (int)EnumNumericValue.MenosUno,
-                    strValor = EnumFilterHead.TODOS.ToString()
+                    id = (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.MenosUno,
+                    strValor = Pixir.Not.Data.Extended.Enum.EnumFilterHead.TODOS.ToString()
                 });
                 dgvFiltroComCatEstadoCivil.DataSource = list;
                 dgvFiltroComCatEstadoCivil.Rows[0].Selected = true;
+
             }
             catch (Exception _e)
             {
                 MessageBox.Show(_e.Message);
             }
         }
+
         private void setFiltroComCatSexo()
         {
             try
             {
                 List<CatalogExchange> list = CtrlCatalogFilter.getCatalog<ComCatSexo>(this.DataContext).ToList();
-                if(list.Count == (int)Data.Extended.Enum.EnumNumericValue.Cero)
+                if (list.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                 {
                     //this.messageFilterException = Resources.MES_COM_CAT_SEXO_VACIO;
                     //filterExceptionPrincipal.throwExceptionInFilter();
                 }
                 list.Insert(0, new CatalogExchange()
                 {
-                    id = (int)Data.Extended.Enum.EnumNumericValue.MenosUno,
-                    strValor = Data.Extended.Enum.EnumFilterHead.TODOS.ToString()
+                    id = (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.MenosUno,
+                    strValor = Pixir.Not.Data.Extended.Enum.EnumFilterHead.TODOS.ToString()
                 });
                 dgvFiltroComCatSexo.DataSource = list;
                 dgvFiltroComCatSexo.Rows[0].Selected = true;
@@ -285,32 +345,37 @@ namespace Pixir.Not.View.Views.Common.Persona
         {
             try
             {
-                this.estadoRegistroCriteria.id = (int)Data.Generic.EnumRegisterState.Activo;
+                this.estadoRegistroCriteria.id = (int)Pixir.Not.Data.Generic.EnumRegisterState.Activo;
             }
             catch (Exception _e)
             {
                 MessageBox.Show(_e.Message);
             }
         }
+
+
         #endregion
 
         #region Metodo setResultado
+
+
         private void setResultadoComPersona()
         {
-            bool estadoCivilCriteria = false;
+
+            bool estadoEstadoCivilCriteria = false;
             bool estadoSexoCriteria = false;
             bool estadoTextoCriteria = false;
 
-            int valueEstadoCivilCriteria = (int)Data.Extended.Enum.EnumNumericValue.Cero;
+            int valueEstadoCivilCriteria = (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero;
             string valueTextoCriteria = String.Empty;
-            int valueSexoCriteria = (int)Data.Extended.Enum.EnumNumericValue.Cero;
+            int valueSexoCriteria = (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero;
 
-            if(this.estadoCivilCriteria != null)
+            if (this.estadoCivilCriteria != null)
             {
-                estadoCivilCriteria = true;
+                estadoEstadoCivilCriteria = true;
                 valueEstadoCivilCriteria = this.estadoCivilCriteria.id;
             }
-            if(this.sexoCriteria != null)
+            if (this.sexoCriteria != null)
             {
                 estadoSexoCriteria = true;
                 valueSexoCriteria = this.sexoCriteria.id;
@@ -322,26 +387,29 @@ namespace Pixir.Not.View.Views.Common.Persona
             try
             {
                 Expression<Func<ComPersona, bool>> predicate = c => (
-                 ((estadoCivilCriteria) ? c.ComCatEstadoCivil.id == valueEstadoCivilCriteria : true) &&
-                 ((estadoSexoCriteria) ? c.ComCatSexo.id == valueSexoCriteria : true) &&
-                 ((estadoTextoCriteria) ? (((estadoTextoCriteria) ? c.strNombreCompleto.Contains(txtCriteria.Text.Trim()) : false))
-                 : true)
-                 );
+                ((estadoEstadoCivilCriteria) ? c.ComCatEstadoCivil.id == valueEstadoCivilCriteria : true) &&
+                ((estadoSexoCriteria) ? c.ComCatSexo.id == valueSexoCriteria : true) &&
+                ((estadoTextoCriteria) ? (((estadoTextoCriteria) ? c.strNombreCompleto.Contains(txtCriteria.Text.Trim()) : false))
+                : true)
+                );
                 this.countSetResultadoGlobal++;
-                List<ComPersona> lista = this.queryCompiled.getListEntity(this.DataContext)
-                    .Where(predicate).OrderBy(p => p.strAPaterno).ToList();
+                List<ComPersona> lista = this.queryCompiled.getListEntity(this.DataContext).Where(predicate).OrderBy(p => p.strAPaterno).ToList();
+                //List<ComPersona> lista = Not.View.Common.Compiled<ComPersona>.generateQueryCompile(this.dataContext, predicate);
+                //    //.getListEntity(this.DataContext).Where(predicate).OrderBy(p => p.strAPaterno).ToList();
                 this.dgvResultadoPersona.DataSource = lista;
                 this.lblNumeroFilas.Text = "{" + this.dgvResultadoPersona.RowCount.ToString() + "}";
                 this.busquedaSinDatos();
+
             }
             catch (Exception _e)
             {
                 MessageBox.Show(_e.Message);
             }
         }
+
         /// <summary>
-        /// Limpia las etiquetas y los data gridviews de el area de detalle, si no existiese
-        /// coincidencia en los datos de busqueda
+        /// Limpia las etiquetas y los data gridviews de el area de detalle, si no existe coincidencia en los
+        /// datos de busqueda
         /// </summary>
         private void limpiarSetDetalle()
         {
@@ -359,13 +427,15 @@ namespace Pixir.Not.View.Views.Common.Persona
                 this.lblSexoMuestra.Text = String.Empty;
                 this.lblRegimenMatrimonialMuestra.Text = String.Empty;
                 this.lblEstadoCivilMuestra.Text = String.Empty;
-                this.dgvDetalleComDatoContacto.Rows.Clear();
+                this.dgvDetalleComDatoContacto.DataSource = null;
             }
             catch (Exception _e)
             {
                 MessageBox.Show(_e.Message);
             }
+
         }
+
         /// <summary>
         /// Metodo que limpia el area de detalle y muesta la el error provider que indica que no existe
         /// datos para la consulta.
@@ -374,10 +444,10 @@ namespace Pixir.Not.View.Views.Common.Persona
         {
             try
             {
-                if (countSetResultadoGlobal >= (int)Not.Data.Extended.Enum.EnumNumericValue.Uno)
+                if (countSetResultadoGlobal >= (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Uno)
                 {
                     if (this.dgvResultadoPersona.Container == null &&
-                        this.dgvResultadoPersona.Rows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                        this.dgvResultadoPersona.Rows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                     {
                         this.limpiarSetDetalle();
                         //this.eprAvisoBusqueda.SetError(this.pnlBusqueda, Resources.MES_BUSQUEDA_VACIA);
@@ -396,12 +466,13 @@ namespace Pixir.Not.View.Views.Common.Persona
             {
                 MessageBox.Show(_e.Message);
             }
+
         }
         #endregion
 
         #region Metodos setDetalle
 
-        private void loadEntity(ComPersona _entity)
+        private void loadEntity(Pixir.Not.Data.Entity.ComPersona _entity)
         {
             this.baseEntity = _entity;
 
@@ -413,7 +484,7 @@ namespace Pixir.Not.View.Views.Common.Persona
 
         }
 
-        private void setDetalleTextBox(ComPersona _entity)
+        private void setDetalleTextBox(Pixir.Not.Data.Entity.ComPersona _entity)
         {
             try
             {
@@ -434,7 +505,7 @@ namespace Pixir.Not.View.Views.Common.Persona
             }
         }
 
-        private void setDetalleDateTime(ComPersona _entity)
+        private void setDetalleDateTime(Pixir.Not.Data.Entity.ComPersona _entity)
         {
             try
             {
@@ -448,14 +519,15 @@ namespace Pixir.Not.View.Views.Common.Persona
             }
         }
 
-        private void setDetalleCheckBox(ComPersona _entity)
+        private void setDetalleCheckBox(Pixir.Not.Data.Entity.ComPersona _entity)
         {
             try
             {
                 if (_entity.ComCatNacionalidad != null)
                 {
+
                     //muestra los datos si la nacionalidad es diferente de mexicana
-                    if (!_entity.ComCatNacionalidad.strValor.Equals(Not.Data.Extended.Enum.EnumNationality.MEXICANA.ToString()))
+                    if (!_entity.ComCatNacionalidad.strValor.Equals(Pixir.Not.Data.Extended.Enum.EnumNationality.MEXICANA.ToString()))
                     {
                         this.lblDocLegEstMuestra.Text = ((_entity.bitDocEstancia == false) ? "No" : "Si");
                     }
@@ -477,7 +549,7 @@ namespace Pixir.Not.View.Views.Common.Persona
             }
         }
 
-        private void setDetalleComboBox(ComPersona _entity)
+        private void setDetalleComboBox(Pixir.Not.Data.Entity.ComPersona _entity)
         {
             try
             {
@@ -535,13 +607,13 @@ namespace Pixir.Not.View.Views.Common.Persona
             }
         }
 
-        private void setDetalleDataGridView(ComPersona _entity)
+        private void setDetalleDataGridView(Pixir.Not.Data.Entity.ComPersona _entity)
         {
             try
             {
                 //Contacto
                 //Expression<Func<CliPersonaCliente, bool>> predicateCliente = c => c.ComPersona.id == _entity.id;
-                //CliPersonaCliente personaCliente = Not.Control.CtrlGeneric.getItemByExpresssion<CliPersonaCliente>(this.DataContext, predicateCliente);
+                //CliPersonaCliente personaCliente = Pixir.Not.Control.CtrlGeneric.getItemByExpresssion<CliPersonaCliente>(this.DataContext, predicateCliente);
                 //bool isCliente = (personaCliente != null) ? true : false;
                 //List<ComDatoContacto> comDatoContacto = new List<ComDatoContacto>();
                 //Expression<Func<ComDatoContacto, bool>> predicateDatoContactoPersona = c => c.ComPersona.id == _entity.id;
@@ -557,14 +629,20 @@ namespace Pixir.Not.View.Views.Common.Persona
             }
             catch (Exception _e)
             {
-                this.limpiarSetDetalle();
+                //if (this.conexionExceptionPrincipal.messajeConexionException(_e, this))
+                //{
+                //    this.limpiarSetDetalle();
+                //    return;
+                //}
                 MessageBox.Show(_e.Message);
             }
 
         }
+
         #endregion
 
-        #region eventos frmClientePersonaPrincipal
+        #region Eventos frmClientePersonaPrincipal 
+
         private void txtCriteria_TextChanged(object sender, EventArgs e)
         {
             try
@@ -584,170 +662,183 @@ namespace Pixir.Not.View.Views.Common.Persona
             }
         }
 
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //frmPersonaManager view = new frmPersonaManager();
-                DataContext dataContextTemp = new DcGeneralDataContext();
+      //  private void btnAgregar_Click(object sender, EventArgs e)
+        //{
+          //  try
+           // {
+            //    frmPersonaManager view = new frmPersonaManager();
+            //    DataContext dataContextTemp = new DCGeneralDataContext();
 
-                //ComPersona entity = view.show(this, dataContextTemp, EnumOperationType.Agregar);
+            //    Not.Data.Entity.ComPersona entity = view.show(this, dataContextTemp, Not.Data.Extended.Enum.EnumOperationType.Agregar, this.segUsuario, null);
 
-                //if (entity != null)
-                //{
-                //    dataContextTemp.SubmitChanges();
-                //    //this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_GUARDAR);
-                //    this.setResultadoComPersona();
-                //    dataContextTemp = null;
-                //}
-                //else
-                //{
-                //    this.setDataContextRefresh();
-                //    this.setResultadoComPersona();
-                //}
-                //this.btnAgregar.Focus();
+            //    if (entity != null)
+            //    {
+            //        dataContextTemp.SubmitChanges();
+            //        this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_GUARDAR);
+            //        this.setResultadoComPersona();
+            //        dataContextTemp = null;
+            //    }
+            //    else
+            //    {
+            //        this.setDataContextRefresh();
+            //        this.setResultadoComPersona();
+            //    }
+            //    this.btnAgregar.Focus();
 
-            }
-            catch (Exception _e)
-            {
-               // if (this.conexionExceptionPrincipal.messajeConexionException(_e, this)) { return; }
-                MessageBox.Show(_e.Message);
-            }
+            //}
+            //catch (Exception _e)
+            //{
+            //    if (this.conexionExceptionPrincipal.messajeConexionException(_e, this)) { return; }
+            //    MessageBox.Show(_e.Message);
+            //}
 
-        }
+       // }
 
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
-                {
-                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-                    //    MessageBoxIcon.Information);
-                }
-                else
-                {
-                    if (this.baseEntity != null)
-                    {
-                        //frmPersonaManager view = new frmPersonaManager();
-                        DataContext dataContextTemp = new DcGeneralDataContext();
-                        ComPersona persona = (ComPersona)this.dgvResultadoPersona.SelectedRows[0].DataBoundItem;
-                        Expression<Func<ComPersona, bool>> predicate = c => c.id == persona.id;
-                        ComPersona person = CtrlGeneric.getItemByExpression<ComPersona>(dataContextTemp, predicate);
+        //private void btnEditar_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (this.dgvResultadoPersona.SelectedRows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
+        //        {
+        //            //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+        //            //    MessageBoxIcon.Information);
+        //        }
+        //        else
+        //        {
+        //            if (this.baseEntity != null)
+        //            {
+        //                frmPersonaManager view = new frmPersonaManager();
+        //                DataContext dataContextTemp = new DCGeneralDataContext();
+        //                ComPersona persona = (ComPersona)this.dgvResultadoPersona.SelectedRows[0].DataBoundItem;
+        //                Expression<Func<ComPersona, bool>> predicate = c => c.id == persona.id;
+        //                ComPersona person = CtrlGeneric.getItemByExpresssion<ComPersona>(dataContextTemp, predicate);
 
-                        //if (view.show(this, person, dataContextTemp, EnumOperationType.Editar) != null)
-                        //{
-                        //    dataContextTemp.SubmitChanges();
-                        //    //this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_EDITAR);
-                        //    this.setDataContextRefresh();
-                        //    this.setResultadoComPersona();
-                        //    dataContextTemp = null;
-                        //}
-                        //else
-                        //{
-                        //    this.setDataContextRefresh();
-                        //    this.setResultadoComPersona();
-                        //}
-                    }
-                    else
-                    {
-                        //MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_ENTIDAD_VACIA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-                        // MessageBoxIcon.Information);
-                    }
-                }
-            }
-            catch (Exception _e)
-            {
-                MessageBox.Show(_e.Message);
-            }
-        }
+        //                if (view.show(this, person, dataContextTemp, Not.Data.Extended.Enum.EnumOperationType.Editar, this.segUsuario, null) != null)
+        //                {
+        //                    dataContextTemp.SubmitChanges();
+        //                    this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_EDITAR);
+        //                    this.setDataContextRefresh();
+        //                    this.setResultadoComPersona();
+        //                    dataContextTemp = null;
+        //                }
+        //                else
+        //                {
+        //                    this.setDataContextRefresh();
+        //                    this.setResultadoComPersona();
+        //                }
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_ENTIDAD_VACIA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+        //                 MessageBoxIcon.Information);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception _e)
+        //    {
+
+        //        if (this.conexionExceptionPrincipal.messajeConexionException(_e, this)) { return; }
+        //        MessageBox.Show(_e.Message);
+        //    }
 
 
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
-                {
-                    //MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_SELECCIONAR_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR,
-                    //    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                   // DialogResult result = MessageBox.Show(Control.Comun.Properties.Resources.PRE_ELIMINAR_REGISTRO, Resources.TIT_PERSONA_SINGULAR, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    //if (result == DialogResult.Yes)
-                    //{
+        //}
 
-                    //    this.dataContextDelete = new DCGeneralDataContext();
-                    //    ComPersona persona = (ComPersona)this.dgvResultadoPersona.SelectedRows[0].DataBoundItem;
-                    //    ComPersona person = this.dataContextDelete.GetTable<ComPersona>().Single(c => c.id == persona.id);
-                    //    this.dataContextDelete.GetTable<Not.Data.Entity.ComPersona>().DeleteOnSubmit(person);
-                    //    this.dataContextDelete.SubmitChanges();
-                    //    this.setResultadoComPersona();
-                    //    this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_ELIMINAR);
-                    //    this.dataContextDelete = null;
-                    //}
-                }
-            }
-            catch (Exception _e)
-            {
-                this.dataContextDelete = null;
-                //if (_e.sqlExceptionDelete(this)) { return; }
-                MessageBox.Show(_e.Message);
-            }
-        }
+        //private void btnEliminar_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
 
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
-                {
-                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-                    //    MessageBoxIcon.Information);
-                }
-                else
-                {
-                    this.setDataContextRefresh();
-                    this.setResultadoComPersona();
-                    //this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_ACTUALIZAR);
-                }
-            }
-            catch (Exception _e)
-            {
-                MessageBox.Show(_e.Message);
-            }
-        }
+        //        if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+        //        {
+        //            MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_SELECCIONAR_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR,
+        //                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //        else
+        //        {
+        //            DialogResult result = MessageBox.Show(Not.Control.Comun.Properties.Resources.PRE_ELIMINAR_REGISTRO, Resources.TIT_PERSONA_SINGULAR, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-        private void btnImprimir_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
-                {
-                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-                    //    MessageBoxIcon.Information);
-                }
-                else
-                {
-                    if (this.baseEntity != null)
-                    {
-                        //frmPersonaReport view = new frmPersonaReport();
-                        //view.Show(this, this.baseEntity, this.dataContext);
-                    }
-                    else
-                    {
-                        //MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_ENTIDAD_VACIA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-                        // MessageBoxIcon.Information);
-                    }
-                }
-            }
-            catch (Exception _e)
-            {
-                MessageBox.Show(_e.Message);
-            }
-        }
+        //            if (result == DialogResult.Yes)
+        //            {
+
+        //                this.dataContextDelete = new DCGeneralDataContext();
+        //                ComPersona persona = (ComPersona)this.dgvResultadoPersona.SelectedRows[0].DataBoundItem;
+        //                ComPersona person = this.dataContextDelete.GetTable<ComPersona>().Single(c => c.id == persona.id);
+        //                this.dataContextDelete.GetTable<Not.Data.Entity.ComPersona>().DeleteOnSubmit(person);
+        //                this.dataContextDelete.SubmitChanges();
+        //                this.setResultadoComPersona();
+        //                this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_ELIMINAR);
+        //                this.dataContextDelete = null;
+
+
+        //            }
+
+        //        }
+
+        //    }
+        //    catch (Exception _e)
+        //    {
+
+        //        this.dataContextDelete = null;
+        //        if (this.conexionExceptionPrincipal.throwExceptionInCatchDelete(_e, this)) { return; };
+        //        if (_e.sqlExceptionDelete(this)) { return; }
+        //        MessageBox.Show(_e.Message);
+        //    }
+        //}
+
+        //private void btnActualizar_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+        //        {
+        //            MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+        //                MessageBoxIcon.Information);
+        //        }
+        //        else
+        //        {
+        //            this.setDataContextRefresh();
+        //            this.setResultadoComPersona();
+        //            this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_ACTUALIZAR);
+        //        }
+        //    }
+        //    catch (Exception _e)
+        //    {
+
+        //        if (this.conexionExceptionPrincipal.messajeConexionException(_e, this)) { return; }
+        //        MessageBox.Show(_e.Message);
+        //    }
+        //}
+
+        //private void btnImprimir_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+        //        {
+        //            MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+        //                MessageBoxIcon.Information);
+        //        }
+        //        else
+        //        {
+        //            if (this.baseEntity != null)
+        //            {
+        //                frmPersonaReport view = new frmPersonaReport();
+        //                view.Show(this, this.baseEntity, this.dataContext);
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_ENTIDAD_VACIA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+        //                 MessageBoxIcon.Information);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception _e)
+        //    {
+        //        MessageBox.Show(_e.Message);
+        //    }
+        //}
 
         /// <summary>
         /// Metodo que verifica que la empresa no se haya asignado anterior mente como cobDeposito
@@ -758,11 +849,11 @@ namespace Pixir.Not.View.Views.Common.Persona
         {
             try
             {
-                if (this.dgvResultadoPersona.SelectedRows.Count > (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                if (this.dgvResultadoPersona.SelectedRows.Count > (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                 {
                     if (this.baseEntity == null)
                     {
-                        //MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_SELECCIONAR_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        //MessageBox.Show(this, Pixir.Not.Control.Comun.Properties.Resources.MES_SELECCIONAR_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
                         //    MessageBoxIcon.Error);
                         return;
                     }
@@ -774,14 +865,14 @@ namespace Pixir.Not.View.Views.Common.Persona
                             if (!regla.validaRegistro(this.baseEntity, dataContext))
                             {
                                 //MessageBox.Show(this, regla.Mensaje, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                               // this.asignData = true;
+                                this.asignData = true;
                                 this.buttonSelect = false;
                                 break;
 
                             }
                             else
                             {
-                               // this.asignData = false;
+                                this.asignData = false;
                                 this.Close();
                                 break;
                             }
@@ -791,7 +882,7 @@ namespace Pixir.Not.View.Views.Common.Persona
                 }
                 else
                 {
-                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                   // MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception _e)
@@ -805,7 +896,7 @@ namespace Pixir.Not.View.Views.Common.Persona
         {
             try
             {
-                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                 {
                     //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
                     //    MessageBoxIcon.Information);
@@ -842,23 +933,23 @@ namespace Pixir.Not.View.Views.Common.Persona
         {
             try
             {
-                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                 {
                     //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
                     //    MessageBoxIcon.Information);
                 }
                 else
                 {
-                    if (this.baseEntity != null)
-                    {
+                    //if (this.baseEntity != null)
+                    //{
 
-                        //CatalogoEnvio catalogoEnvio = new CatalogoEnvio();
-                        //catalogoEnvio.IdSegModulo = (int)Not.Data.Extended.Enum.EnumSegModulo.PERSONA;
-                        //catalogoEnvio.IdConCatTabla = (int)Not.Data.Extended.Enum.EnumConCatTabla.ComPersona;
-                        //catalogoEnvio.IntId = this.baseEntity.id;
-                        //Not.View.Views.Common.EMail.frmEMailEnvioManualManager view = new Not.View.Views.Common.EMail.frmEMailEnvioManualManager();
-                        //view.show(this, this.baseEntity, this.segUsuario, catalogoEnvio, this.DataContext, Not.Data.Extended.Enum.EnumOperationType.Editar);
-                    }
+                    //    CatalogoEnvio catalogoEnvio = new CatalogoEnvio();
+                    //    catalogoEnvio.IdSegModulo = (int)Not.Data.Extended.Enum.EnumSegModulo.PERSONA;
+                    //    catalogoEnvio.IdConCatTabla = (int)Not.Data.Extended.Enum.EnumConCatTabla.ComPersona;
+                    //    catalogoEnvio.IntId = this.baseEntity.id;
+                    //    Not.View.Views.Common.EMail.frmEMailEnvioManualManager view = new Not.View.Views.Common.EMail.frmEMailEnvioManualManager();
+                    //    view.show(this, this.baseEntity, this.segUsuario, catalogoEnvio, this.DataContext, Not.Data.Extended.Enum.EnumOperationType.Editar);
+                    //}
                 }
             }
             catch (Exception _e)
@@ -892,12 +983,14 @@ namespace Pixir.Not.View.Views.Common.Persona
         #endregion
 
         #region Eventos DatagridView
+
+
         private void dgvFiltroComCatEstadoCivil_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 this.estadoCivilCriteria = (CatalogExchange)this.dgvFiltroComCatEstadoCivil.Rows[e.RowIndex].DataBoundItem;
-                if (this.estadoCivilCriteria.id == (int)Not.Data.Extended.Enum.EnumNumericValue.MenosUno)
+                if (this.estadoCivilCriteria.id == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.MenosUno)
                 {
                     this.estadoCivilCriteria = null;
                 }
@@ -916,7 +1009,7 @@ namespace Pixir.Not.View.Views.Common.Persona
             {
 
                 this.sexoCriteria = (CatalogExchange)this.dgvFiltroComCatSexo.Rows[e.RowIndex].DataBoundItem;
-                if (this.sexoCriteria.id == (int)Not.Data.Extended.Enum.EnumNumericValue.MenosUno)
+                if (this.sexoCriteria.id == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.MenosUno)
                 {
                     this.sexoCriteria = null;
                 }
@@ -939,6 +1032,8 @@ namespace Pixir.Not.View.Views.Common.Persona
             {
                 MessageBox.Show(_e.Message);
             }
+
+
         }
 
         private void cellEnter(object sender, DataGridViewCellEventArgs e)
@@ -954,7 +1049,8 @@ namespace Pixir.Not.View.Views.Common.Persona
         }
         #endregion
 
-        #region metodos setMensaje
+        #region Metodos setMensaje
+
         private void hidePanelMessage()
         {
             try
@@ -966,6 +1062,7 @@ namespace Pixir.Not.View.Views.Common.Persona
             {
                 MessageBox.Show(_e.Message);
             }
+
         }
 
         private void setTimer()
@@ -974,7 +1071,7 @@ namespace Pixir.Not.View.Views.Common.Persona
             {
                 clock.Tick += new EventHandler(timMenOperacion_Tick);
                 clock.Enabled = true;
-                clock.Interval = (int)Data.Extended.Enum.EnumTime.IntervaloMensajePrincipal;
+                clock.Interval = (int)Pixir.Not.Data.Extended.Enum.EnumTime.IntervaloMensajePrincipal;
                 clock.Start();
 
 
@@ -997,17 +1094,20 @@ namespace Pixir.Not.View.Views.Common.Persona
             {
                 MessageBox.Show(_e.Message);
             }
+
+
         }
 
         private void timMenOperacion_Tick(object sender, EventArgs e)
         {
             this.hidePanelMessage();
         }
+
         #endregion
 
         #region  Pantalla Emergente Persona
 
-        public ComPersona Show(Form _padre)
+        public Pixir.Not.Data.Entity.ComPersona Show(Form _padre)
         {
             try
             {
@@ -1018,12 +1118,12 @@ namespace Pixir.Not.View.Views.Common.Persona
                     this.AutoSize = true;
                     this.StartPosition = FormStartPosition.CenterParent;
                     this.WindowState = FormWindowState.Normal;
-                    this.Size = new System.Drawing.Size((int)Not.Data.Extended.Enum.EnumScreenSize.SizeXVentanaAsignar,
-                        (int)Not.Data.Extended.Enum.EnumScreenSize.SizeYVentanaAsignar);
+                    this.Size = new System.Drawing.Size((int)Pixir.Not.Data.Extended.Enum.EnumScreenSize.SizeXVentanaAsignar,
+                        (int)Pixir.Not.Data.Extended.Enum.EnumScreenSize.SizeYVentanaAsignar);
                     if (this.Size.Height < 1600)
                     {
-                        this.Size = new System.Drawing.Size((int)Not.Data.Extended.Enum.EnumScreenSize.SizeXVentanaAsignar,
-                        (int)Not.Data.Extended.Enum.EnumScreenSize.SizeYVentanaAsignar);
+                        this.Size = new System.Drawing.Size((int)Pixir.Not.Data.Extended.Enum.EnumScreenSize.SizeXVentanaAsignar,
+                        (int)Pixir.Not.Data.Extended.Enum.EnumScreenSize.SizeYVentanaAsignar);
                     }
                     this.ShowDialog();
                 }
@@ -1038,7 +1138,7 @@ namespace Pixir.Not.View.Views.Common.Persona
                 MessageBox.Show(_e.Message);
             }
 
-            if (this.asingData || this.closeWindow || this.buttonExit)
+            if (this.asignData || this.closeWindow || this.buttonExit)
             {
                 return null;
             }
@@ -1094,12 +1194,12 @@ namespace Pixir.Not.View.Views.Common.Persona
 
         private void setPermisosPantalla()
         {
-        //    this.btnAgregar.Visible = this.permisosPantalla.Agregar;
-        //    this.btnEditar.Visible = this.permisosPantalla.Editar;
-        //    this.btnEliminar.Visible = this.permisosPantalla.Eliminar;
-        //    this.btnImprimir.Visible = this.permisosPantalla.Imprimir;
-        //    this.btnSms.Visible = this.permisosPantalla.Sms;
-        //    this.btnCorreoElectronico.Visible = this.permisosPantalla.Mail;
+            //this.btnAgregar.Visible = this.permisosPantalla.Agregar;
+            //this.btnEditar.Visible = this.permisosPantalla.Editar;
+            //this.btnEliminar.Visible = this.permisosPantalla.Eliminar;
+            //this.btnImprimir.Visible = this.permisosPantalla.Imprimir;
+            //this.btnSms.Visible = this.permisosPantalla.Sms;
+            //this.btnCorreoElectronico.Visible = this.permisosPantalla.Mail;
 
         }
         #endregion

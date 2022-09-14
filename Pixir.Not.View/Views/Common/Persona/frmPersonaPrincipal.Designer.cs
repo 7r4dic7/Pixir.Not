@@ -75,7 +75,12 @@
             this.lblMensajeOperacion = new System.Windows.Forms.Label();
             this.dgvResultadoPersona = new System.Windows.Forms.DataGridView();
             this.dgvFiltroComCatSexo = new System.Windows.Forms.DataGridView();
+            this.dtgValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.catalogExchangeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dgvFiltroComCatEstadoCivil = new System.Windows.Forms.DataGridView();
+            this.dgtValor1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSms = new System.Windows.Forms.Button();
             this.btnCorreoElectronico = new System.Windows.Forms.Button();
             this.lblNumeroFilas = new System.Windows.Forms.Label();
@@ -87,6 +92,7 @@
             this.pnlMesOperacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultadoPersona)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatSexo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.catalogExchangeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatEstadoCivil)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -494,13 +500,22 @@
             // 
             // dgvResultadoPersona
             // 
+            this.dgvResultadoPersona.AllowUserToAddRows = false;
+            this.dgvResultadoPersona.AllowUserToDeleteRows = false;
+            this.dgvResultadoPersona.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvResultadoPersona.BackgroundColor = System.Drawing.Color.White;
             this.dgvResultadoPersona.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResultadoPersona.Location = new System.Drawing.Point(204, 79);
+            this.dgvResultadoPersona.MultiSelect = false;
             this.dgvResultadoPersona.Name = "dgvResultadoPersona";
+            this.dgvResultadoPersona.ReadOnly = true;
+            this.dgvResultadoPersona.RowHeadersVisible = false;
             this.dgvResultadoPersona.RowHeadersWidth = 51;
             this.dgvResultadoPersona.RowTemplate.Height = 29;
             this.dgvResultadoPersona.Size = new System.Drawing.Size(395, 482);
             this.dgvResultadoPersona.TabIndex = 0;
+            this.dgvResultadoPersona.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.cellEnter);
+            this.dgvResultadoPersona.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResultadoPersona_RowEnter);
             // 
             // dgvFiltroComCatSexo
             // 
@@ -508,8 +523,13 @@
             this.dgvFiltroComCatSexo.AllowUserToDeleteRows = false;
             this.dgvFiltroComCatSexo.AllowUserToResizeColumns = false;
             this.dgvFiltroComCatSexo.AllowUserToResizeRows = false;
+            this.dgvFiltroComCatSexo.AutoGenerateColumns = false;
             this.dgvFiltroComCatSexo.BackgroundColor = System.Drawing.Color.White;
             this.dgvFiltroComCatSexo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFiltroComCatSexo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dtgValor,
+            this.idDataGridViewTextBoxColumn1});
+            this.dgvFiltroComCatSexo.DataSource = this.catalogExchangeBindingSource;
             this.dgvFiltroComCatSexo.Location = new System.Drawing.Point(12, 125);
             this.dgvFiltroComCatSexo.MultiSelect = false;
             this.dgvFiltroComCatSexo.Name = "dgvFiltroComCatSexo";
@@ -519,16 +539,72 @@
             this.dgvFiltroComCatSexo.RowTemplate.Height = 29;
             this.dgvFiltroComCatSexo.Size = new System.Drawing.Size(190, 132);
             this.dgvFiltroComCatSexo.TabIndex = 17;
+            this.dgvFiltroComCatSexo.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.cellEnter);
+            this.dgvFiltroComCatSexo.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFiltroComCatSexo_RowEnter);
+            // 
+            // dtgValor
+            // 
+            this.dtgValor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dtgValor.DataPropertyName = "strValor";
+            this.dtgValor.HeaderText = "Sexo";
+            this.dtgValor.MinimumWidth = 6;
+            this.dtgValor.Name = "dtgValor";
+            this.dtgValor.ReadOnly = true;
+            // 
+            // idDataGridViewTextBoxColumn1
+            // 
+            this.idDataGridViewTextBoxColumn1.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn1.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
+            this.idDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn1.Visible = false;
+            this.idDataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // catalogExchangeBindingSource
+            // 
+            this.catalogExchangeBindingSource.DataSource = typeof(Pixir.Not.View.Extended.Disconnect.Catalog.CatalogExchange);
             // 
             // dgvFiltroComCatEstadoCivil
             // 
+            this.dgvFiltroComCatEstadoCivil.AllowUserToAddRows = false;
+            this.dgvFiltroComCatEstadoCivil.AllowUserToDeleteRows = false;
+            this.dgvFiltroComCatEstadoCivil.AllowUserToResizeColumns = false;
+            this.dgvFiltroComCatEstadoCivil.AllowUserToResizeRows = false;
+            this.dgvFiltroComCatEstadoCivil.AutoGenerateColumns = false;
+            this.dgvFiltroComCatEstadoCivil.BackgroundColor = System.Drawing.Color.White;
             this.dgvFiltroComCatEstadoCivil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFiltroComCatEstadoCivil.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgtValor1,
+            this.idDataGridViewTextBoxColumn});
+            this.dgvFiltroComCatEstadoCivil.DataSource = this.catalogExchangeBindingSource;
             this.dgvFiltroComCatEstadoCivil.Location = new System.Drawing.Point(12, 263);
             this.dgvFiltroComCatEstadoCivil.Name = "dgvFiltroComCatEstadoCivil";
+            this.dgvFiltroComCatEstadoCivil.ReadOnly = true;
+            this.dgvFiltroComCatEstadoCivil.RowHeadersVisible = false;
             this.dgvFiltroComCatEstadoCivil.RowHeadersWidth = 51;
             this.dgvFiltroComCatEstadoCivil.RowTemplate.Height = 29;
             this.dgvFiltroComCatEstadoCivil.Size = new System.Drawing.Size(190, 178);
             this.dgvFiltroComCatEstadoCivil.TabIndex = 18;
+            // 
+            // dgtValor1
+            // 
+            this.dgtValor1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgtValor1.DataPropertyName = "strValor";
+            this.dgtValor1.HeaderText = "Estado Civil";
+            this.dgtValor1.MinimumWidth = 6;
+            this.dgtValor1.Name = "dgtValor1";
+            this.dgtValor1.ReadOnly = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            this.idDataGridViewTextBoxColumn.Width = 125;
             // 
             // btnSms
             // 
@@ -601,6 +677,7 @@
             this.pnlMesOperacion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultadoPersona)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatSexo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.catalogExchangeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatEstadoCivil)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -660,5 +737,10 @@
         private Panel pnlMesOperacion;
         private Label lblMensajeOperacion;
         private BindingSource dataGridViewBindingSource;
+        private DataGridViewTextBoxColumn dtgValor;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
+        private BindingSource catalogExchangeBindingSource;
+        private DataGridViewTextBoxColumn dgtValor1;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
     }
 }

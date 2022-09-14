@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pixir.Not.Data.Entity
 {
-    public class ComCatEstadoRegistro : IBaseCatalog
+    public partial class ComCatEstadoRegistro : IBaseCatalog
     {
         public override string ToString()
         {
