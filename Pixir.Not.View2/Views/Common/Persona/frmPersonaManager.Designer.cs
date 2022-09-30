@@ -45,7 +45,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellidoPaterno = new System.Windows.Forms.TextBox();
             this.txtApellidoMaterno = new System.Windows.Forms.TextBox();
             this.txtCurp = new System.Windows.Forms.TextBox();
@@ -65,6 +64,8 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.dteFechaNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.lblAccion = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picModulo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComDatoContacto)).BeginInit();
             this.SuspendLayout();
@@ -214,87 +215,115 @@
             this.label3.TabIndex = 42;
             this.label3.Text = "Apellido materno:";
             // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(162, 83);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(249, 22);
-            this.txtNombre.TabIndex = 43;
-            // 
             // txtApellidoPaterno
             // 
+            this.txtApellidoPaterno.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtApellidoPaterno.Location = new System.Drawing.Point(162, 108);
+            this.txtApellidoPaterno.MaxLength = 50;
             this.txtApellidoPaterno.Name = "txtApellidoPaterno";
+            this.txtApellidoPaterno.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.txtApellidoPaterno.Size = new System.Drawing.Size(249, 22);
             this.txtApellidoPaterno.TabIndex = 44;
+            this.txtApellidoPaterno.TextChanged += new System.EventHandler(this.txtChanged);
             // 
             // txtApellidoMaterno
             // 
+            this.txtApellidoMaterno.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtApellidoMaterno.Location = new System.Drawing.Point(162, 136);
+            this.txtApellidoMaterno.MaxLength = 50;
             this.txtApellidoMaterno.Name = "txtApellidoMaterno";
+            this.txtApellidoMaterno.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.txtApellidoMaterno.Size = new System.Drawing.Size(249, 22);
             this.txtApellidoMaterno.TabIndex = 45;
+            this.txtApellidoMaterno.TextChanged += new System.EventHandler(this.txtChanged);
             // 
             // txtCurp
             // 
+            this.txtCurp.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCurp.Location = new System.Drawing.Point(162, 304);
+            this.txtCurp.MaxLength = 18;
             this.txtCurp.Name = "txtCurp";
+            this.txtCurp.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.txtCurp.Size = new System.Drawing.Size(249, 22);
             this.txtCurp.TabIndex = 46;
+            this.txtCurp.TextChanged += new System.EventHandler(this.txtChanged);
             // 
             // txtFolioIfe
             // 
+            this.txtFolioIfe.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtFolioIfe.Location = new System.Drawing.Point(162, 331);
+            this.txtFolioIfe.MaxLength = 20;
             this.txtFolioIfe.Name = "txtFolioIfe";
+            this.txtFolioIfe.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.txtFolioIfe.Size = new System.Drawing.Size(249, 22);
             this.txtFolioIfe.TabIndex = 47;
+            this.txtFolioIfe.TextChanged += new System.EventHandler(this.txtChanged);
             // 
             // txtOriginario
             // 
+            this.txtOriginario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtOriginario.Location = new System.Drawing.Point(162, 361);
+            this.txtOriginario.MaxLength = 50;
             this.txtOriginario.Name = "txtOriginario";
+            this.txtOriginario.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.txtOriginario.Size = new System.Drawing.Size(249, 22);
             this.txtOriginario.TabIndex = 48;
+            this.txtOriginario.TextChanged += new System.EventHandler(this.txtChanged);
             // 
             // cmbComCatSexo
             // 
+            this.cmbComCatSexo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbComCatSexo.FormattingEnabled = true;
             this.cmbComCatSexo.Location = new System.Drawing.Point(162, 191);
             this.cmbComCatSexo.Name = "cmbComCatSexo";
-            this.cmbComCatSexo.Size = new System.Drawing.Size(249, 24);
+            this.cmbComCatSexo.Size = new System.Drawing.Size(349, 24);
             this.cmbComCatSexo.TabIndex = 50;
+            this.cmbComCatSexo.SelectedValueChanged += new System.EventHandler(this.cmbChanged);
             // 
             // cmbComCatEstadoCivil
             // 
+            this.cmbComCatEstadoCivil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbComCatEstadoCivil.FormattingEnabled = true;
             this.cmbComCatEstadoCivil.Location = new System.Drawing.Point(162, 217);
             this.cmbComCatEstadoCivil.Name = "cmbComCatEstadoCivil";
-            this.cmbComCatEstadoCivil.Size = new System.Drawing.Size(249, 24);
+            this.cmbComCatEstadoCivil.Size = new System.Drawing.Size(349, 24);
             this.cmbComCatEstadoCivil.TabIndex = 51;
+            this.cmbComCatEstadoCivil.SelectedValueChanged += new System.EventHandler(this.cmbChanged);
             // 
             // cmbComCatRegimenMatrimonial
             // 
+            this.cmbComCatRegimenMatrimonial.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbComCatRegimenMatrimonial.FormattingEnabled = true;
             this.cmbComCatRegimenMatrimonial.Location = new System.Drawing.Point(162, 244);
             this.cmbComCatRegimenMatrimonial.Name = "cmbComCatRegimenMatrimonial";
-            this.cmbComCatRegimenMatrimonial.Size = new System.Drawing.Size(249, 24);
+            this.cmbComCatRegimenMatrimonial.Size = new System.Drawing.Size(349, 24);
             this.cmbComCatRegimenMatrimonial.TabIndex = 52;
+            this.cmbComCatRegimenMatrimonial.SelectedValueChanged += new System.EventHandler(this.cmbChanged);
             // 
             // cmbComCatOcupacion
             // 
+            this.cmbComCatOcupacion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbComCatOcupacion.FormattingEnabled = true;
             this.cmbComCatOcupacion.Location = new System.Drawing.Point(162, 273);
             this.cmbComCatOcupacion.Name = "cmbComCatOcupacion";
-            this.cmbComCatOcupacion.Size = new System.Drawing.Size(249, 24);
+            this.cmbComCatOcupacion.Size = new System.Drawing.Size(349, 24);
             this.cmbComCatOcupacion.TabIndex = 53;
+            this.cmbComCatOcupacion.SelectedValueChanged += new System.EventHandler(this.cmbChanged);
             // 
             // cmbComCatNacionalidad
             // 
+            this.cmbComCatNacionalidad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbComCatNacionalidad.FormattingEnabled = true;
             this.cmbComCatNacionalidad.Location = new System.Drawing.Point(162, 393);
             this.cmbComCatNacionalidad.Name = "cmbComCatNacionalidad";
-            this.cmbComCatNacionalidad.Size = new System.Drawing.Size(249, 24);
+            this.cmbComCatNacionalidad.Size = new System.Drawing.Size(349, 24);
             this.cmbComCatNacionalidad.TabIndex = 54;
+            this.cmbComCatNacionalidad.SelectedValueChanged += new System.EventHandler(this.cmbChanged);
             // 
             // chkDocumentoLegalEstancia
             // 
@@ -304,6 +333,7 @@
             this.chkDocumentoLegalEstancia.Size = new System.Drawing.Size(18, 17);
             this.chkDocumentoLegalEstancia.TabIndex = 55;
             this.chkDocumentoLegalEstancia.UseVisualStyleBackColor = true;
+            this.chkDocumentoLegalEstancia.CheckedChanged += new System.EventHandler(this.chkChanged);
             // 
             // label4
             // 
@@ -320,7 +350,7 @@
             this.btnAgregarDatoContacto.Name = "btnAgregarDatoContacto";
             this.btnAgregarDatoContacto.Size = new System.Drawing.Size(75, 23);
             this.btnAgregarDatoContacto.TabIndex = 57;
-            this.btnAgregarDatoContacto.Text = "button1";
+            this.btnAgregarDatoContacto.Text = "Agregar";
             this.btnAgregarDatoContacto.UseVisualStyleBackColor = true;
             // 
             // btnEditarDatoContacto
@@ -329,7 +359,7 @@
             this.btnEditarDatoContacto.Name = "btnEditarDatoContacto";
             this.btnEditarDatoContacto.Size = new System.Drawing.Size(75, 23);
             this.btnEditarDatoContacto.TabIndex = 58;
-            this.btnEditarDatoContacto.Text = "button2";
+            this.btnEditarDatoContacto.Text = "Editar";
             this.btnEditarDatoContacto.UseVisualStyleBackColor = true;
             // 
             // btnEliminarDatoContacto
@@ -338,44 +368,86 @@
             this.btnEliminarDatoContacto.Name = "btnEliminarDatoContacto";
             this.btnEliminarDatoContacto.Size = new System.Drawing.Size(75, 23);
             this.btnEliminarDatoContacto.TabIndex = 59;
-            this.btnEliminarDatoContacto.Text = "button3";
+            this.btnEliminarDatoContacto.Text = "Eliminar";
             this.btnEliminarDatoContacto.UseVisualStyleBackColor = true;
             // 
             // dgvComDatoContacto
             // 
+            this.dgvComDatoContacto.AllowUserToAddRows = false;
+            this.dgvComDatoContacto.AllowUserToDeleteRows = false;
+            this.dgvComDatoContacto.AllowUserToResizeColumns = false;
+            this.dgvComDatoContacto.AllowUserToResizeRows = false;
+            this.dgvComDatoContacto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvComDatoContacto.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvComDatoContacto.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvComDatoContacto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvComDatoContacto.Location = new System.Drawing.Point(15, 518);
+            this.dgvComDatoContacto.MultiSelect = false;
             this.dgvComDatoContacto.Name = "dgvComDatoContacto";
+            this.dgvComDatoContacto.ReadOnly = true;
+            this.dgvComDatoContacto.RowHeadersVisible = false;
             this.dgvComDatoContacto.RowHeadersWidth = 51;
             this.dgvComDatoContacto.RowTemplate.Height = 24;
-            this.dgvComDatoContacto.Size = new System.Drawing.Size(396, 150);
+            this.dgvComDatoContacto.Size = new System.Drawing.Size(496, 150);
             this.dgvComDatoContacto.TabIndex = 60;
+            this.dgvComDatoContacto.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.cellEnter);
+            this.dgvComDatoContacto.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.rowAdded);
+            this.dgvComDatoContacto.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.rowRemoved);
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(255, 674);
+            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnAceptar.Location = new System.Drawing.Point(355, 674);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 61;
-            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.TabIndex = 0;
+            this.btnAceptar.Text = "&Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptarClick);
             // 
             // btnCancelar
             // 
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(336, 674);
+            this.btnCancelar.Location = new System.Drawing.Point(436, 674);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 62;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TabIndex = 0;
+            this.btnCancelar.Text = "&Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelarClick);
             // 
             // dteFechaNacimiento
             // 
+            this.dteFechaNacimiento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dteFechaNacimiento.CustomFormat = "\"dd MM yyyy\"";
             this.dteFechaNacimiento.Location = new System.Drawing.Point(162, 163);
             this.dteFechaNacimiento.Name = "dteFechaNacimiento";
-            this.dteFechaNacimiento.Size = new System.Drawing.Size(249, 22);
+            this.dteFechaNacimiento.Size = new System.Drawing.Size(349, 22);
             this.dteFechaNacimiento.TabIndex = 63;
+            this.dteFechaNacimiento.ValueChanged += new System.EventHandler(this.dteChanged);
+            // 
+            // lblAccion
+            // 
+            this.lblAccion.AutoSize = true;
+            this.lblAccion.Location = new System.Drawing.Point(193, 31);
+            this.lblAccion.Name = "lblAccion";
+            this.lblAccion.Size = new System.Drawing.Size(0, 16);
+            this.lblAccion.TabIndex = 64;
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtNombre.Location = new System.Drawing.Point(162, 83);
+            this.txtNombre.MaxLength = 50;
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.txtNombre.Size = new System.Drawing.Size(249, 22);
+            this.txtNombre.TabIndex = 65;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtChanged);
             // 
             // frmPersonaManager
             // 
@@ -384,7 +456,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(433, 701);
+            this.ClientSize = new System.Drawing.Size(533, 801);
+            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.lblAccion);
             this.Controls.Add(this.dteFechaNacimiento);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
@@ -404,7 +478,6 @@
             this.Controls.Add(this.txtCurp);
             this.Controls.Add(this.txtApellidoMaterno);
             this.Controls.Add(this.txtApellidoPaterno);
-            this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label18);
@@ -454,7 +527,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtApellidoPaterno;
         private System.Windows.Forms.TextBox txtApellidoMaterno;
         private System.Windows.Forms.TextBox txtCurp;
@@ -474,5 +546,7 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DateTimePicker dteFechaNacimiento;
+        private System.Windows.Forms.Label lblAccion;
+        private System.Windows.Forms.TextBox txtNombre;
     }
 }

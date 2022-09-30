@@ -286,15 +286,6 @@ namespace Pixir.Not.View2.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Seleccionar registro.
-        /// </summary>
-        internal static string MES_SELECCIONAR_REGISTRO {
-            get {
-                return ResourceManager.GetString("MES_SELECCIONAR_REGISTRO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Selecciona un registro.
         /// </summary>
         internal static string MES_SELEECIONAR_REGISTRO {
@@ -322,7 +313,7 @@ namespace Pixir.Not.View2.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Se cerrara el registro.
+        ///   Busca una cadena traducida similar a Pre cierre editar.
         /// </summary>
         internal static string PRE_CIERRE_EDITAR {
             get {
@@ -331,7 +322,7 @@ namespace Pixir.Not.View2.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Se cerrara el registro.
+        ///   Busca una cadena traducida similar a Pre cierre nuevo.
         /// </summary>
         internal static string PRE_CIERRE_NUEVO {
             get {
@@ -340,7 +331,7 @@ namespace Pixir.Not.View2.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Eliminar registro.
+        ///   Busca una cadena traducida similar a Registro pre eliminado.
         /// </summary>
         internal static string PRE_ELIMINAR_REGISTRO {
             get {

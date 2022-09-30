@@ -192,9 +192,6 @@
   <data name="MES_PERSONA_DUPLICADA_CURP_NUEVA_LLENA" xml:space="preserve">
     <value>Persona duplicada, CURP nueva llena</value>
   </data>
-  <data name="MES_SELECCIONAR_REGISTRO" xml:space="preserve">
-    <value>Seleccionar registro</value>
-  </data>
   <data name="MES_SELEECIONAR_REGISTRO" xml:space="preserve">
     <value>Selecciona un registro</value>
   </data>
@@ -205,13 +202,13 @@
     <value>Usuario invalido</value>
   </data>
   <data name="PRE_CIERRE_EDITAR" xml:space="preserve">
-    <value>Se cerrara el registro</value>
+    <value>Pre cierre editar</value>
   </data>
   <data name="PRE_CIERRE_NUEVO" xml:space="preserve">
-    <value>Se cerrara el registro</value>
+    <value>Pre cierre nuevo</value>
   </data>
   <data name="PRE_ELIMINAR_REGISTRO" xml:space="preserve">
-    <value>Eliminar registro</value>
+    <value>Registro pre eliminado</value>
   </data>
   <data name="TIT_PERSONA_SINGULAR" xml:space="preserve">
     <value>Persona singular</value>

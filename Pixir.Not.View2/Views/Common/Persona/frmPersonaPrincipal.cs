@@ -11,6 +11,9 @@ using Pixir.Not.Data.Entity;
 using System.Linq.Expressions;
 using Pixir.Not.View.Extended.View;
 using Pixir.Not.View.Extended.Disconnect.Catalog;
+using Pixir.Not.View2.Views.Common.Persona;
+using Pixir.Not.Control;
+using Pixir.Not.View2.Properties;
 
 #endregion
 namespace Not.View.Views.Common.Persona
@@ -298,7 +301,7 @@ namespace Not.View.Views.Common.Persona
                 List<CatalogExchange> list = CtrlCatalogFilter.getCatalog<ComCatEstadoCivil>(this.DataContext).ToList();
                 if (list.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                 {
-                    //this.messageFilterException = Resources.MES_COM_CAT_ESTADO_CIVIL_VACIO;
+                    this.messageFilterException = Resources.MES_COM_CAT_ESTADO_CIVIL_VACIO;
                     //filterExceptionPrincipal.throwExceptionInFilter();
                 }
 
@@ -324,7 +327,7 @@ namespace Not.View.Views.Common.Persona
                 List<CatalogExchange> list = CtrlCatalogFilter.getCatalog<ComCatSexo>(this.DataContext).ToList();
                 if (list.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                 {
-                    //this.messageFilterException = Resources.MES_COM_CAT_SEXO_VACIO;
+                    this.messageFilterException = Resources.MES_COM_CAT_SEXO_VACIO;
                     //filterExceptionPrincipal.throwExceptionInFilter();
                 }
                 list.Insert(0, new CatalogExchange()
@@ -450,16 +453,16 @@ namespace Not.View.Views.Common.Persona
                         this.dgvResultadoPersona.Rows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                     {
                         this.limpiarSetDetalle();
-                        //this.eprAvisoBusqueda.SetError(this.pnlBusqueda, Resources.MES_BUSQUEDA_VACIA);
+                        this.eprAvisoBusqueda.SetError(this.pnlBusqueda, Resources.MES_BUSQUEDA_VACIA);
                     }
                     else
                     {
-                       // this.eprAvisoBusqueda.SetError(this.pnlBusqueda, String.Empty);
+                       this.eprAvisoBusqueda.SetError(this.pnlBusqueda, String.Empty);
                     }
                 }
                 else
                 {
-                    //this.eprAvisoBusqueda.SetError(this.pnlBusqueda, String.Empty);
+                    this.eprAvisoBusqueda.SetError(this.pnlBusqueda, String.Empty);
                 }
             }
             catch (Exception _e)
@@ -662,183 +665,182 @@ namespace Not.View.Views.Common.Persona
             }
         }
 
-      //  private void btnAgregar_Click(object sender, EventArgs e)
-        //{
-          //  try
-           // {
-            //    frmPersonaManager view = new frmPersonaManager();
-            //    DataContext dataContextTemp = new DCGeneralDataContext();
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmPersonaManager view = new frmPersonaManager();
+                DataContext dataContextTemp = new DcGeneralDataContext();
 
-            //    Not.Data.Entity.ComPersona entity = view.show(this, dataContextTemp, Not.Data.Extended.Enum.EnumOperationType.Agregar, this.segUsuario, null);
+                Pixir.Not.Data.Entity.ComPersona entity = view.show(this, dataContextTemp, Pixir.Not.Data.Extended.Enum.EnumOperationType.Agregar);
 
-            //    if (entity != null)
-            //    {
-            //        dataContextTemp.SubmitChanges();
-            //        this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_GUARDAR);
-            //        this.setResultadoComPersona();
-            //        dataContextTemp = null;
-            //    }
-            //    else
-            //    {
-            //        this.setDataContextRefresh();
-            //        this.setResultadoComPersona();
-            //    }
-            //    this.btnAgregar.Focus();
+                if (entity != null)
+                {
+                    dataContextTemp.SubmitChanges();
+                    this.getPanel(Resources.MES_OPERACION_EXITO_GUARDAR);
+                    this.setResultadoComPersona();
+                    dataContextTemp = null;
+                }
+                else
+                {
+                    this.setDataContextRefresh();
+                    this.setResultadoComPersona();
+                }
+                this.btnAgregar.Focus();
 
-            //}
-            //catch (Exception _e)
-            //{
-            //    if (this.conexionExceptionPrincipal.messajeConexionException(_e, this)) { return; }
-            //    MessageBox.Show(_e.Message);
-            //}
+            }
+            catch (Exception _e)
+            {
+                
+                MessageBox.Show(_e.Message);
+            }
 
-       // }
+        }
 
-        //private void btnEditar_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (this.dgvResultadoPersona.SelectedRows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
-        //        {
-        //            //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-        //            //    MessageBoxIcon.Information);
-        //        }
-        //        else
-        //        {
-        //            if (this.baseEntity != null)
-        //            {
-        //                frmPersonaManager view = new frmPersonaManager();
-        //                DataContext dataContextTemp = new DCGeneralDataContext();
-        //                ComPersona persona = (ComPersona)this.dgvResultadoPersona.SelectedRows[0].DataBoundItem;
-        //                Expression<Func<ComPersona, bool>> predicate = c => c.id == persona.id;
-        //                ComPersona person = CtrlGeneric.getItemByExpresssion<ComPersona>(dataContextTemp, predicate);
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                    if (this.baseEntity != null)
+                    {
+                        frmPersonaManager view = new frmPersonaManager();
+                        DataContext dataContextTemp = new DcGeneralDataContext();
+                        ComPersona persona = (ComPersona)this.dgvResultadoPersona.SelectedRows[0].DataBoundItem;
+                        Expression<Func<ComPersona, bool>> predicate = c => c.id == persona.id;
+                        ComPersona person = CtrlGeneric.getItemByExpression<ComPersona>(dataContextTemp, predicate);
 
-        //                if (view.show(this, person, dataContextTemp, Not.Data.Extended.Enum.EnumOperationType.Editar, this.segUsuario, null) != null)
-        //                {
-        //                    dataContextTemp.SubmitChanges();
-        //                    this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_EDITAR);
-        //                    this.setDataContextRefresh();
-        //                    this.setResultadoComPersona();
-        //                    dataContextTemp = null;
-        //                }
-        //                else
-        //                {
-        //                    this.setDataContextRefresh();
-        //                    this.setResultadoComPersona();
-        //                }
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_ENTIDAD_VACIA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-        //                 MessageBoxIcon.Information);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception _e)
-        //    {
+                        if (view.show(this, person, dataContextTemp, Pixir.Not.Data.Extended.Enum.EnumOperationType.Editar) != null)
+                        {
+                            dataContextTemp.SubmitChanges();
+                            this.getPanel(Resources.MES_OPERACION_EXITO_EDITAR);
+                            this.setDataContextRefresh();
+                            this.setResultadoComPersona();
+                            dataContextTemp = null;
+                        }
+                        else
+                        {
+                            this.setDataContextRefresh();
+                            this.setResultadoComPersona();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(this, Resources.MES_ENTIDAD_VACIA, Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                         MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception _e)
+            {
 
-        //        if (this.conexionExceptionPrincipal.messajeConexionException(_e, this)) { return; }
-        //        MessageBox.Show(_e.Message);
-        //    }
-
-
-
-        //}
-
-        //private void btnEliminar_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-
-        //        if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
-        //        {
-        //            MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_SELECCIONAR_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR,
-        //                MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //        else
-        //        {
-        //            DialogResult result = MessageBox.Show(Not.Control.Comun.Properties.Resources.PRE_ELIMINAR_REGISTRO, Resources.TIT_PERSONA_SINGULAR, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-        //            if (result == DialogResult.Yes)
-        //            {
-
-        //                this.dataContextDelete = new DCGeneralDataContext();
-        //                ComPersona persona = (ComPersona)this.dgvResultadoPersona.SelectedRows[0].DataBoundItem;
-        //                ComPersona person = this.dataContextDelete.GetTable<ComPersona>().Single(c => c.id == persona.id);
-        //                this.dataContextDelete.GetTable<Not.Data.Entity.ComPersona>().DeleteOnSubmit(person);
-        //                this.dataContextDelete.SubmitChanges();
-        //                this.setResultadoComPersona();
-        //                this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_ELIMINAR);
-        //                this.dataContextDelete = null;
+                
+                MessageBox.Show(_e.Message);
+            }
 
 
-        //            }
 
-        //        }
+        }
 
-        //    }
-        //    catch (Exception _e)
-        //    {
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
 
-        //        this.dataContextDelete = null;
-        //        if (this.conexionExceptionPrincipal.throwExceptionInCatchDelete(_e, this)) { return; };
-        //        if (_e.sqlExceptionDelete(this)) { return; }
-        //        MessageBox.Show(_e.Message);
-        //    }
-        //}
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    MessageBox.Show(this, Resources.MES_SELECCIONAR_REGISTRO, Resources.TIT_VERIFICAR,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show(Resources.PRE_ELIMINAR_REGISTRO, Resources.TIT_PERSONA_SINGULAR, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-        //private void btnActualizar_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
-        //        {
-        //            MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-        //                MessageBoxIcon.Information);
-        //        }
-        //        else
-        //        {
-        //            this.setDataContextRefresh();
-        //            this.setResultadoComPersona();
-        //            this.getPanel(Not.Control.Comun.Properties.Resources.MES_OPERACION_EXITO_ACTUALIZAR);
-        //        }
-        //    }
-        //    catch (Exception _e)
-        //    {
+                    if (result == DialogResult.Yes)
+                    {
 
-        //        if (this.conexionExceptionPrincipal.messajeConexionException(_e, this)) { return; }
-        //        MessageBox.Show(_e.Message);
-        //    }
-        //}
+                        this.dataContextDelete = new DcGeneralDataContext();
+                        ComPersona persona = (ComPersona)this.dgvResultadoPersona.SelectedRows[0].DataBoundItem;
+                        ComPersona person = this.dataContextDelete.GetTable<ComPersona>().Single(c => c.id == persona.id);
+                        this.dataContextDelete.GetTable<Pixir.Not.Data.Entity.ComPersona>().DeleteOnSubmit(person);
+                        this.dataContextDelete.SubmitChanges();
+                        this.setResultadoComPersona();
+                        this.getPanel(Resources.MES_OPERACION_EXITO_ELIMINAR);
+                        this.dataContextDelete = null;
 
-        //private void btnImprimir_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (this.dgvResultadoPersona.SelectedRows.Count == (int)Not.Data.Extended.Enum.EnumNumericValue.Cero)
-        //        {
-        //            MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-        //                MessageBoxIcon.Information);
-        //        }
-        //        else
-        //        {
-        //            if (this.baseEntity != null)
-        //            {
-        //                frmPersonaReport view = new frmPersonaReport();
-        //                view.Show(this, this.baseEntity, this.dataContext);
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show(this, Not.Control.Comun.Properties.Resources.MES_ENTIDAD_VACIA, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-        //                 MessageBoxIcon.Information);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception _e)
-        //    {
-        //        MessageBox.Show(_e.Message);
-        //    }
-        //}
+
+                    }
+
+                }
+
+            }
+            catch (Exception _e)
+            {
+
+                this.dataContextDelete = null;
+                
+               
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                    this.setDataContextRefresh();
+                    this.setResultadoComPersona();
+                    this.getPanel(Resources.MES_OPERACION_EXITO_ACTUALIZAR);
+                }
+            }
+            catch (Exception _e)
+            {
+
+                MessageBox.Show(_e.Message);
+            }
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvResultadoPersona.SelectedRows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
+                {
+                    MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                    if (this.baseEntity != null)
+                    {
+                        //frmPersonaReport view = new frmPersonaReport();
+                        //view.Show(this, this.baseEntity, this.dataContext);
+                    }
+                    else
+                    {
+                        MessageBox.Show(this, Resources.MES_ENTIDAD_VACIA, Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception _e)
+            {
+                MessageBox.Show(_e.Message);
+            }
+        }
 
         /// <summary>
         /// Metodo que verifica que la empresa no se haya asignado anterior mente como cobDeposito
@@ -853,8 +855,8 @@ namespace Not.View.Views.Common.Persona
                 {
                     if (this.baseEntity == null)
                     {
-                        //MessageBox.Show(this, Pixir.Not.Control.Comun.Properties.Resources.MES_SELECCIONAR_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-                        //    MessageBoxIcon.Error);
+                        MessageBox.Show(this, Resources.MES_SELECCIONAR_REGISTRO, Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
                         return;
                     }
                     this.buttonSelect = true;
@@ -864,7 +866,7 @@ namespace Not.View.Views.Common.Persona
                         {
                             if (!regla.validaRegistro(this.baseEntity, dataContext))
                             {
-                                //MessageBox.Show(this, regla.Mensaje, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(this, regla.Mensaje, Resources.TIT_VERIFICAR, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 this.asignData = true;
                                 this.buttonSelect = false;
                                 break;
@@ -882,7 +884,7 @@ namespace Not.View.Views.Common.Persona
                 }
                 else
                 {
-                   // MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Resources.TIT_VERIFICAR, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception _e)
@@ -898,8 +900,8 @@ namespace Not.View.Views.Common.Persona
             {
                 if (this.dgvResultadoPersona.SelectedRows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                 {
-                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-                    //    MessageBoxIcon.Information);
+                    MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -935,8 +937,8 @@ namespace Not.View.Views.Common.Persona
             {
                 if (this.dgvResultadoPersona.SelectedRows.Count == (int)Pixir.Not.Data.Extended.Enum.EnumNumericValue.Cero)
                 {
-                    //MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Not.Control.Comun.Properties.Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
-                    //    MessageBoxIcon.Information);
+                    MessageBox.Show(this, Resources.MES_NO_EXISTE_REGISTRO, Resources.TIT_VERIFICAR, MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
                 else
                 {

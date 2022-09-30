@@ -44,13 +44,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Control\Comun\CtrlPersona.cs" />
     <Compile Include="CtrlGeneric.cs" />
+    <Compile Include="Extensiones.cs" />
     <Compile Include="Interface\Comun\Extended\Validate\ValidateComboBox.cs" />
     <Compile Include="Interface\Comun\Extended\Validate\ValidateDate.cs" />
     <Compile Include="Interface\Comun\Extended\Validate\ValidateTextBox.cs" />
     <Compile Include="Interface\Comun\IControlRegister.cs" />
     <Compile Include="Interface\Comun\IRegisterRules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="TablaBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pixir.Not.Data.Generic\Pixir.Not.Data.Generic.csproj">
@@ -61,6 +69,13 @@
       <Project>{4e0b0e2f-5e3e-46f8-8e61-d4825f2518c9}</Project>
       <Name>Pixir.Not.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

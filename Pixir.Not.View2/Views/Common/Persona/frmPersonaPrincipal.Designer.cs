@@ -81,18 +81,18 @@
             this.lblMensajeOperacion = new System.Windows.Forms.Label();
             this.lblNumeroFilas = new System.Windows.Forms.Label();
             this.pnlPrincipalDetalle = new System.Windows.Forms.Panel();
-            this.comPersonaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.eprAvisoBusqueda = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dgtEstadoCivil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.catalogExchangeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dgtSexo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.strNombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.strAPaternoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.strAMaternoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dteFechaNacimientoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comPersonaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dgtEstadoCivil = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.catalogExchangeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dgtSexo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.picModulo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatSexo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltroComCatEstadoCivil)).BeginInit();
@@ -101,8 +101,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleComDatoContacto)).BeginInit();
             this.pnlBusqueda.SuspendLayout();
             this.pnlMesOperacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comPersonaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eprAvisoBusqueda)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comPersonaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.catalogExchangeBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -132,7 +132,9 @@
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 2;
             this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // txtCriteria
             // 
@@ -150,7 +152,9 @@
             this.btnEliminar.Size = new System.Drawing.Size(92, 23);
             this.btnEliminar.TabIndex = 4;
             this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnEditar
             // 
@@ -159,7 +163,9 @@
             this.btnEditar.Size = new System.Drawing.Size(92, 23);
             this.btnEditar.TabIndex = 5;
             this.btnEditar.Text = "Editar";
+            this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnSeleccionar
             // 
@@ -169,6 +175,7 @@
             this.btnSeleccionar.TabIndex = 6;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // btnActualizar
             // 
@@ -177,7 +184,9 @@
             this.btnActualizar.Size = new System.Drawing.Size(92, 23);
             this.btnActualizar.TabIndex = 7;
             this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // dgvFiltroComCatSexo
             // 
@@ -455,6 +464,7 @@
             this.btnSalir.TabIndex = 32;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnSms
             // 
@@ -615,13 +625,53 @@
             this.pnlPrincipalDetalle.Size = new System.Drawing.Size(340, 613);
             this.pnlPrincipalDetalle.TabIndex = 48;
             // 
-            // comPersonaBindingSource
-            // 
-            this.comPersonaBindingSource.DataSource = typeof(Pixir.Not.Data.Entity.ComPersona);
-            // 
             // eprAvisoBusqueda
             // 
             this.eprAvisoBusqueda.ContainerControl = this;
+            // 
+            // idDataGridViewTextBoxColumn2
+            // 
+            this.idDataGridViewTextBoxColumn2.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn2.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.idDataGridViewTextBoxColumn2.Name = "idDataGridViewTextBoxColumn2";
+            this.idDataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // strNombreDataGridViewTextBoxColumn
+            // 
+            this.strNombreDataGridViewTextBoxColumn.DataPropertyName = "strNombre";
+            this.strNombreDataGridViewTextBoxColumn.HeaderText = "strNombre";
+            this.strNombreDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.strNombreDataGridViewTextBoxColumn.Name = "strNombreDataGridViewTextBoxColumn";
+            this.strNombreDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // strAPaternoDataGridViewTextBoxColumn
+            // 
+            this.strAPaternoDataGridViewTextBoxColumn.DataPropertyName = "strAPaterno";
+            this.strAPaternoDataGridViewTextBoxColumn.HeaderText = "strAPaterno";
+            this.strAPaternoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.strAPaternoDataGridViewTextBoxColumn.Name = "strAPaternoDataGridViewTextBoxColumn";
+            this.strAPaternoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // strAMaternoDataGridViewTextBoxColumn
+            // 
+            this.strAMaternoDataGridViewTextBoxColumn.DataPropertyName = "strAMaterno";
+            this.strAMaternoDataGridViewTextBoxColumn.HeaderText = "strAMaterno";
+            this.strAMaternoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.strAMaternoDataGridViewTextBoxColumn.Name = "strAMaternoDataGridViewTextBoxColumn";
+            this.strAMaternoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dteFechaNacimientoDataGridViewTextBoxColumn
+            // 
+            this.dteFechaNacimientoDataGridViewTextBoxColumn.DataPropertyName = "dteFechaNacimiento";
+            this.dteFechaNacimientoDataGridViewTextBoxColumn.HeaderText = "dteFechaNacimiento";
+            this.dteFechaNacimientoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.dteFechaNacimientoDataGridViewTextBoxColumn.Name = "dteFechaNacimientoDataGridViewTextBoxColumn";
+            this.dteFechaNacimientoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // comPersonaBindingSource
+            // 
+            this.comPersonaBindingSource.DataSource = typeof(Pixir.Not.Data.Entity.ComPersona);
             // 
             // dgtEstadoCivil
             // 
@@ -664,46 +714,6 @@
             this.idDataGridViewTextBoxColumn.ReadOnly = true;
             this.idDataGridViewTextBoxColumn.Visible = false;
             this.idDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // idDataGridViewTextBoxColumn2
-            // 
-            this.idDataGridViewTextBoxColumn2.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn2.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.idDataGridViewTextBoxColumn2.Name = "idDataGridViewTextBoxColumn2";
-            this.idDataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // strNombreDataGridViewTextBoxColumn
-            // 
-            this.strNombreDataGridViewTextBoxColumn.DataPropertyName = "strNombre";
-            this.strNombreDataGridViewTextBoxColumn.HeaderText = "strNombre";
-            this.strNombreDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.strNombreDataGridViewTextBoxColumn.Name = "strNombreDataGridViewTextBoxColumn";
-            this.strNombreDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // strAPaternoDataGridViewTextBoxColumn
-            // 
-            this.strAPaternoDataGridViewTextBoxColumn.DataPropertyName = "strAPaterno";
-            this.strAPaternoDataGridViewTextBoxColumn.HeaderText = "strAPaterno";
-            this.strAPaternoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.strAPaternoDataGridViewTextBoxColumn.Name = "strAPaternoDataGridViewTextBoxColumn";
-            this.strAPaternoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // strAMaternoDataGridViewTextBoxColumn
-            // 
-            this.strAMaternoDataGridViewTextBoxColumn.DataPropertyName = "strAMaterno";
-            this.strAMaternoDataGridViewTextBoxColumn.HeaderText = "strAMaterno";
-            this.strAMaternoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.strAMaternoDataGridViewTextBoxColumn.Name = "strAMaternoDataGridViewTextBoxColumn";
-            this.strAMaternoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dteFechaNacimientoDataGridViewTextBoxColumn
-            // 
-            this.dteFechaNacimientoDataGridViewTextBoxColumn.DataPropertyName = "dteFechaNacimiento";
-            this.dteFechaNacimientoDataGridViewTextBoxColumn.HeaderText = "dteFechaNacimiento";
-            this.dteFechaNacimientoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.dteFechaNacimientoDataGridViewTextBoxColumn.Name = "dteFechaNacimientoDataGridViewTextBoxColumn";
-            this.dteFechaNacimientoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // frmPersonaPrincipal
             // 
@@ -777,8 +787,8 @@
             this.pnlBusqueda.PerformLayout();
             this.pnlMesOperacion.ResumeLayout(false);
             this.pnlMesOperacion.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comPersonaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eprAvisoBusqueda)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comPersonaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.catalogExchangeBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
