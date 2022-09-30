@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pixir.Not.View.Extended.Disconnect.Catalog
+namespace Pixir.Not.View2.Extended.Disconnect.Catalog
 {
     public static class CtrlCatalogFilter
     {

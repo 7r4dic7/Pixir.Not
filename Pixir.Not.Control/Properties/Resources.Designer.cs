@@ -31,7 +31,10 @@ namespace Pixir.Not.View2.Properties {
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-        
+
+        public static string MES_FECHA_IGUAL_POSTERIOR_HOY { get; internal set; }
+        public static string MES_EDAD_MENOR_18_ANOS { get; internal set; }
+
         /// <summary>
         ///   Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
         /// </summary>

@@ -694,7 +694,7 @@
             // 
             // catalogExchangeBindingSource
             // 
-            this.catalogExchangeBindingSource.DataSource = typeof(Pixir.Not.View.Extended.Disconnect.Catalog.CatalogExchange);
+            this.catalogExchangeBindingSource.DataSource = typeof(Pixir.Not.View2.Extended.Disconnect.Catalog.CatalogExchange);
             // 
             // dgtSexo
             // 

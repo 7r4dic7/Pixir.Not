@@ -11,8 +11,8 @@ using System.Windows.Forms;
 
 using System.Data.Linq;
 using Pixir.Not.Data.Entity;
-using Pixir.Not.View.Common;
-using Pixir.Not.View.Extended;
+using Pixir.Not.View2.Common;
+using Pixir.Not.View2.Extended;
 using Pixir.Not.Control;
 using Pixir.Not.Data.Extended.Enum;
 using Pixir.Not.Control.Interface.Comun;

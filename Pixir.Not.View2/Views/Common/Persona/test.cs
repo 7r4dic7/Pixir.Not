@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pixir.Not.View.Views.Common.Persona
+namespace Pixir.Not.View2.Views.Common.Persona
 {
     public class test
     {

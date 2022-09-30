@@ -9,8 +9,8 @@ using System.Data.Linq;
 using Pixir.Not.Control.Interface.Comun;
 using Pixir.Not.Data.Entity;
 using System.Linq.Expressions;
-using Pixir.Not.View.Extended.View;
-using Pixir.Not.View.Extended.Disconnect.Catalog;
+using Pixir.Not.View2.Extended.View;
+using Pixir.Not.View2.Extended.Disconnect.Catalog;
 using Pixir.Not.View2.Views.Common.Persona;
 using Pixir.Not.Control;
 using Pixir.Not.View2.Properties;
@@ -143,7 +143,7 @@ namespace Not.View.Views.Common.Persona
         /// <summary>
         /// Objeto que establece la instancia de la clase que contiene la sentncia precompilda para principal.
         /// </summary>
-        Pixir.Not.View.Common.Compiled<Pixir.Not.Data.Entity.ComPersona> queryCompiled = new Pixir.Not.View.Common.Compiled<ComPersona>();
+        Pixir.Not.View2.Common.Compiled<Pixir.Not.Data.Entity.ComPersona> queryCompiled = new Pixir.Not.View2.Common.Compiled<ComPersona>();
         #endregion
 
         #region Propiedades

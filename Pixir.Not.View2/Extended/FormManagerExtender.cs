@@ -1,5 +1,5 @@
 ﻿using Pixir.Not.Data.Extended.Enum;
-using Pixir.Not.View.Common;
+using Pixir.Not.View2.Common;
 using System;
 using System.Collections.Generic;
 using System.Data.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Pixir.Not.View.Extended
+namespace Pixir.Not.View2.Extended
 {
     /// <summary>
     /// Clase que contiene metodos extendidos XXXXX

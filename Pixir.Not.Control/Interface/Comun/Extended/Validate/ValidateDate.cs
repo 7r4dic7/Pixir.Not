@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pixir.Not.View2.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
@@ -44,8 +45,8 @@ namespace Pixir.Not.Control.Interface.Comun.Extended.Validate
                 //valida si la fecha es igual o mayor al dia de hoy
                 if (_dateTimePicker.Value.Date >= DateTime.Now.Date)
                 {
-                    //MessageBox.Show(_form, Resources.MES_FECHA_IGUAL_POSTERIOR_HOY, Resources.TIT_VERIFICAR,
-                    //    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(_form, Resources.MES_FECHA_IGUAL_POSTERIOR_HOY, Resources.TIT_VERIFICAR,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     return false;
 
@@ -62,13 +63,13 @@ namespace Pixir.Not.Control.Interface.Comun.Extended.Validate
                     //si edad es menor a 18
                     if (DateTime.Now.Year - _dateTimePicker.Value.Year < 18)
                     {
-                        //DialogResult result = MessageBox.Show(Resources.MES_EDAD_MENOR_18_ANOS, Resources.TIT_VERIFICAR,
-                        //       MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        DialogResult result = MessageBox.Show(Resources.MES_EDAD_MENOR_18_ANOS, Resources.TIT_VERIFICAR,
+                               MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                        //if (result == DialogResult.Yes)
-                        //{
-                        //    return true;
-                        //}
+                        if (result == DialogResult.Yes)
+                        {
+                            return true;
+                        }
 
                         return false;
                     }
@@ -86,13 +87,13 @@ namespace Pixir.Not.Control.Interface.Comun.Extended.Validate
                         //si el mes de nacimiento es mayor a el mes actual
                         if (_dateTimePicker.Value.Month > DateTime.Now.Month)
                         {
-                            //DialogResult result = MessageBox.Show(Resources.MES_EDAD_MENOR_18_ANOS, Resources.TIT_VERIFICAR,
-                                //MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            DialogResult result = MessageBox.Show(Resources.MES_EDAD_MENOR_18_ANOS, Resources.TIT_VERIFICAR,
+                                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                            //if (result == DialogResult.Yes)
-                            //{
-                            //    return true;
-                            //}
+                            if (result == DialogResult.Yes)
+                            {
+                                return true;
+                            }
 
                             return false;
                         }
@@ -107,13 +108,13 @@ namespace Pixir.Not.Control.Interface.Comun.Extended.Validate
                             //si dia de nacimiento es mayor a dia de hoy
                             if (_dateTimePicker.Value.Day > DateTime.Now.Day)
                             {
-                               // DialogResult result = MessageBox.Show(Resources.MES_EDAD_MENOR_18_ANOS, Resources.TIT_VERIFICAR,
-                                //MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                DialogResult result = MessageBox.Show(Resources.MES_EDAD_MENOR_18_ANOS, Resources.TIT_VERIFICAR,
+                                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                                //if (result == DialogResult.Yes)
-                                //{
-                                //    return true;
-                                //}
+                                if (result == DialogResult.Yes)
+                                {
+                                    return true;
+                                }
 
                                 return false;
 

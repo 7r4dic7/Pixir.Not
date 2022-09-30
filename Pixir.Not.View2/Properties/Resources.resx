@@ -156,8 +156,14 @@
   <data name="MES_CURP_INCORRECTA" xml:space="preserve">
     <value>CURP con formato incorrecto</value>
   </data>
+  <data name="MES_EDAD_MENOR_18_ANOS" xml:space="preserve">
+    <value>La persona no puede ser menor de edad</value>
+  </data>
   <data name="MES_ENTIDAD_VACIA" xml:space="preserve">
     <value>Entidad vacia</value>
+  </data>
+  <data name="MES_FECHA_IGUAL_POSTERIOR_HOY" xml:space="preserve">
+    <value>La fecha no puede ser posterior o igual al dia actual</value>
   </data>
   <data name="MES_NOMBRE_VACIO" xml:space="preserve">
     <value>Nombre vacio</value>

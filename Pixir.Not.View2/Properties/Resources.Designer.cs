@@ -178,11 +178,29 @@ namespace Pixir.Not.View2.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La persona no puede ser menor de edad.
+        /// </summary>
+        internal static string MES_EDAD_MENOR_18_ANOS {
+            get {
+                return ResourceManager.GetString("MES_EDAD_MENOR_18_ANOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Entidad vacia.
         /// </summary>
         internal static string MES_ENTIDAD_VACIA {
             get {
                 return ResourceManager.GetString("MES_ENTIDAD_VACIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La fecha no puede ser posterior o igual al dia actual.
+        /// </summary>
+        internal static string MES_FECHA_IGUAL_POSTERIOR_HOY {
+            get {
+                return ResourceManager.GetString("MES_FECHA_IGUAL_POSTERIOR_HOY", resourceCulture);
             }
         }
         

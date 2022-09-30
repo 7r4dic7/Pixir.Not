@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Pixir.Not.View.Extended.View
+namespace Pixir.Not.View2.Extended.View
 {
     public static class PanelMessagePrincipal
     {

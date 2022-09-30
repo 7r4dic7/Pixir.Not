@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Pixir.Not.View.Common
+namespace Pixir.Not.View2.Common
 {
     public interface ICXFormManager<T>
     {
